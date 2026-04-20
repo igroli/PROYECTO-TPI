@@ -4,7 +4,7 @@ import HouseCard from '../houseCard/HouseCard'
 const Outlet = () => {
   return (
     <div>
-        <h1> ACA VA EL BUSCADOR DE PROPIEDADES</h1>
+        <h1> lalalaalallalal</h1>
         <HouseCard />
     </div>
   )
