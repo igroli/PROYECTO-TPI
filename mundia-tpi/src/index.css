@@ -1,0 +1,21 @@
+:root {
+  /* Colores principales */
+  --primary: #2C3947;      /* Azul oscuro principal */
+  --secondary: #C2A56D;    /* Azul más claro */
+  --accent: #2C3947;       /* Púrpura para énfasis */
+  
+  /* Colores de fondo */
+  --bg-primary: #E8EDF2;   /* Fondo negro */
+  --bg-secondary: #2C3947; /* Fondo azul oscuro */
+  --bg-card: #547A95;      /* Fondo para tarjetas */
+  
+  /* Colores de texto */
+  --text-primary: #fff; /* Texto principal */
+  --text-secondary: #000000; /* Texto secundario */
+  --text-light: #ffffff;   /* Texto en botones/títulos */
+  
+  /* Estados */
+  --success: #64ffda;
+  --error: #ff6b6b;
+  --warning: #ffd93d;
+}
