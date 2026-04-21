@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import NavBar from "../navBar/NavBar";
-import { Button, Form } from "react-bootstrap";
+import { useState } from "react";
 import { useNavigate } from "react-router";
+import { Form, Button } from "react-bootstrap";
+import './Register.css';
 import Footer from "../footer/Footer";
-import "./Login.css";
+import NavBar from "../navBar/NavBar";
 
-export const Login = () => {
+const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -22,10 +22,11 @@ export const Login = () => {
     event.preventDefault();
     navigate("/");
   };
+
   return (
-    <div>
-      <NavBar />
-      <div className="login-container">
+    <>
+    <NavBar />
+    <div className="register-container">
       <Form>
         <Form.Group>
           <Form.Label>Correo electrónico</Form.Label>
@@ -48,12 +49,16 @@ export const Login = () => {
           />
         </Form.Group>
         <Form.Group>
-            <Button onClick={() => navigate("/register")}>No tiene cuenta? Registrese</Button>
+          <Button onClick={() => navigate("/login")}>
+            Tienes cuenta? Inicie sesion
+          </Button>
         </Form.Group>
-        <Button onClick={handleSubmit}>Iniciar Sesion</Button>
+        <Button onClick={handleSubmit}>Registrarse</Button>
       </Form>
-      </div>
-      <Footer />
     </div>
+    <Footer />
+    </>
   );
 };
+
+export default Register;
