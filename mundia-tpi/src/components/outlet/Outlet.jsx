@@ -1,10 +1,11 @@
 import React from 'react'
 import HouseCard from '../houseCard/HouseCard'
+import './Outlet.css'
 
 const Outlet = () => {
   return (
-    <div>
-        <h1> lalalaalallalal</h1>
+    <div className='outlet-container'>
+        <input className='outlet-container-input' type="text" placeholder='Buscar' />
         <HouseCard />
     </div>
   )

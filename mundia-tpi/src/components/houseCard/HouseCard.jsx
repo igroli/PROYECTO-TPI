@@ -1,18 +1,20 @@
 import React from "react";
 import { Button, Card } from "react-bootstrap";
+import "./HouseCard.css";
+import departamentoImg from "../../assets/img/departamento_temp.webp";
 
 const HouseCard = () => {
   return (
     <div>
-      <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src="holder.js/100px180" />
+      <Card className="house-card">
+        <Card.Img variant="top" src={departamentoImg} />
         <Card.Body>
-          <Card.Title>Card Title</Card.Title>
+          <Card.Title>Casa Moderna</Card.Title>
           <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            Hermosa propiedad con excelente ubicación, amplio espacio y todas
+            las comodidades que buscas para tu hogar.
           </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
+          <Button variant="primary">Ver detalles</Button>
         </Card.Body>
       </Card>
     </div>
