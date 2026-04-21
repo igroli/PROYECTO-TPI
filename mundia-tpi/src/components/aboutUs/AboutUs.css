@@ -1,0 +1,25 @@
+.about-us-container {
+  background-color: #eee;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-us-content {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.about-us-content h1,
+.about-us-content h2,
+.about-us-content h3 {
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 0;
+}

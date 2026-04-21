@@ -1,5 +1,4 @@
-import React from 'react'
-import ContactForm from '../../contactForm/ContactForm'
+import ContactForm from '../contactForm/ContactForm'
 import './Footer.css'
 
 const Footer = () => {
