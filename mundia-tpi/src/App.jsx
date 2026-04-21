@@ -4,6 +4,7 @@ import NotFound from "./components/notFound/NotFound";
 import ContactForm from "./components/contactForm/ContactForm";
 import AboutUs from "./components/aboutUs/AboutUs";
 import Propiedades from "./components/propiedades/Propiedades";
+import { Login } from "./components/login/Login";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/contact" element={<ContactForm />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/properties" element={<Propiedades />} />
+          <Route path="/login" element={<Login />}/>
         </Routes>
       </BrowserRouter>
     </div>
