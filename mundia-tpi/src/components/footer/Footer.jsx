@@ -1,7 +1,11 @@
 import ContactForm from '../contactForm/ContactForm'
 import './Footer.css'
+import { useNavigate } from "react-router"
 
 const Footer = () => {
+
+    const navigate = useNavigate();
+
   return (
     <footer className="footer-container">
         <div className="container">
@@ -15,10 +19,11 @@ const Footer = () => {
                 <div className="col-md-4">
                     <h5>Enlaces Útiles</h5>
                     <ul>
-                        <li><a href="#propiedades">Propiedades</a></li>
-                        <li><a href="#nosotros">Nosotros</a></li>
-                        <li><a href="#tasaciones">Tasaciones</a></li>
-                        <li><a href="#blog">Blog</a></li>
+                        <li><a onClick={() => navigate('/properties')}>Propiedades</a></li>
+                        
+                        <li><a onClick={() => navigate('/aboutus')}>Nosotros</a></li>
+                        {/* <li><a onClick={() => navigate('/tasaciones')}>Tasaciones</a></li>
+                        <li><a onClick={() => navigate('/blog')}>Blog</a></li> */}
                     </ul>
                 </div>
                 <div className="col-md-4">

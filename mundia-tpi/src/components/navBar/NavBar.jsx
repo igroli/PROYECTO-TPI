@@ -18,6 +18,7 @@ const NavBar = () => {
                     <Nav.Link onClick={() => navigate('/aboutus')}>Nosotros</Nav.Link>
                     <Nav.Link>Tasaciones</Nav.Link>
                     <Nav.Link onClick={() => navigate('/contact')}>Contacto</Nav.Link>
+                    <Navbar.Brand onClick={() => navigate('/login')}>inicio de sesion</Navbar.Brand> 
                 </Nav>
             </Container>
         </Navbar>
