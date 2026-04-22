@@ -60,3 +60,7 @@
 .register-container .btn-link:hover {
   color: #a38252;
 }
+
+.button-alternate{
+    background-color: #fff;
+}

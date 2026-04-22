@@ -30,6 +30,8 @@
 .footer-container a:hover {
   color: #b8935e;
   opacity: 0.8;
+  cursor: pointer;
+
 }
 
 .footer-container ul {

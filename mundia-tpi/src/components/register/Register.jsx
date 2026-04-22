@@ -49,7 +49,7 @@ const Register = () => {
           />
         </Form.Group>
         <Form.Group>
-          <Button onClick={() => navigate("/login")}>
+          <Button className='button-alternate' onClick={() => navigate("/login")}>
             Tienes cuenta? Inicie sesion
           </Button>
         </Form.Group>
