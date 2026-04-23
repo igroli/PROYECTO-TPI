@@ -1,10 +1,10 @@
 //relacion propiedad reservas
 
-import { Users } from "./Users";
-import { Properties } from "./Properties";
-import { Agents } from "./Agents";
-import { Reservations } from "./Reservations";
-import { Favorites } from "./Favorites";
+import { Users } from "./Users.js";
+import { Properties } from "./Properties.js";
+import { Agents } from "./Agents.js";
+import { Reservations } from "./Reservations.js";
+import { Favorites } from "./Favorites.js";
 
 Properties.hasMany(Reservations, {foreignKey: 'id_properties', onDelete: 'CASCADE'});
 Reservations.belongsTo(Properties, {foreignKey: 'id_properties'});

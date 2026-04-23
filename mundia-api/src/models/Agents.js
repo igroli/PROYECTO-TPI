@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../db";
+import { sequelize } from "../../db.js";
 
 export const Agents = sequelize.define("Agents", {
     id_agents: {
