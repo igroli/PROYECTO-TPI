@@ -47,4 +47,7 @@ export const Properties = sequelize.define("Properties", {
         type: DataTypes.STRING,
         allowNull: false
     }
+},
+{
+    timestamps: false,
 });
