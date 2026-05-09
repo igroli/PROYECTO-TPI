@@ -11,15 +11,16 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
-    setEmail(event.target.value);
+    ; 
+    setEmail(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
-    setPassword(event.target.value);
+    setPassword(e.target.value);
   };
 
   const handleSubmit = (e) => {
-    event.preventDefault();
+    e.preventDefault();
     navigate("/");
   };
   return (

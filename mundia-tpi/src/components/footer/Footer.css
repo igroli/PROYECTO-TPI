@@ -2,7 +2,7 @@
   background: linear-gradient(90deg, var(--primary) 0%, var(--bg-secondary) 100%);
   color: var(--text-light);
   padding: 3rem 2rem 2rem;
-  margin-top: 3rem;
+  margin-top: 0;
   border-top: 3px solid var(--secondary);
 }
 
@@ -105,3 +105,4 @@
     margin-top: 0;
   }
 }
+
