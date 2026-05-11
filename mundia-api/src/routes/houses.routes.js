@@ -1,19 +1,15 @@
 import { Router } from "express";
+import { createProperty, getProperties, getProperty, getCarrouselProperties } from "../services/properties.services.js";
 
 const router = Router();
 
-router.get('/houses', (req, res) => {
-    res.send("Obteniendo propiedades")
-});
+router.get('/houses', getProperties);
 
-router.get('/house/:id', (req, res) => {
-    const { id } = req.params;
-    res.send(`Obteniendo propiedad con id: ${id}`);
-})
+router.get('/randomhouses', getCarrouselProperties);
 
-router.post('/houses', (req, res) => {
-    res.send("Creando propiedad")
-})
+router.get('/house/:id', getProperty);
+
+router.post('/houses', createProperty);
 
 router.put('/houses/:id', (req, res) => {
     const { id } = req.params;

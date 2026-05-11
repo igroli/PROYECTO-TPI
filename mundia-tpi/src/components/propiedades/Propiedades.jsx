@@ -1,17 +1,33 @@
-import NavBar from '../navBar/NavBar';
-import Footer from '../footer/Footer';
-import './Propiedades.css';
+import NavBar from "../navBar/NavBar";
+import Footer from "../footer/Footer";
+import "./Propiedades.css";
+import HouseCard from "../houseCard/HouseCard";
+import { useEffect, useState } from "react";
 
 const Propiedades = () => {
-  return (
-    <div className='propiedades-container'>
-        <NavBar />
-        <div className="propiedades-content">
-          <h1>aqui van las propiedades</h1>
-        </div>
-        <Footer />
-    </div>
-  )
-}
+  const [houses, setHouses] = useState([]);
 
-export default Propiedades
+  useEffect(() => {
+    fetch("http://localhost:3000/houses")
+      .then((res) => res.json())
+      .then((data) => {
+        setHouses([...data]);
+        console.log(data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  return (
+    <div className="propiedades-container">
+      <NavBar />
+      <div className="propiedades-content">
+        {houses.map((house) => (
+          <HouseCard key={house.id} house={house} />
+        ))}
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
+export default Propiedades;

@@ -6,6 +6,7 @@ import AboutUs from "./components/aboutUs/AboutUs";
 import Propiedades from "./components/propiedades/Propiedades";
 import { Login } from "./components/login/Login";
 import Register from "./components/register/Register";
+import AdminPanel from "./components/adminPanel/AdminPanel";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/properties" element={<Propiedades />} />
           <Route path="/login" element={<Login />}/>
           <Route path="/register" element={<Register />} />
+          <Route path="/addproperty" element={<AdminPanel />} />
         </Routes>
       </BrowserRouter>
     </div>
