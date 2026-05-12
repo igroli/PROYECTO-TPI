@@ -11,7 +11,6 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
-    ; 
     setEmail(e.target.value);
   };
 

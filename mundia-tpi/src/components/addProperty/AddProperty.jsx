@@ -5,55 +5,26 @@ import { Form, Row, Col, Button } from "react-bootstrap";
 
 const AddProperty = () => {
   const [properties, setProperties] = useState([]);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [type_property, setTypeProperty] = useState("Departamento");
-  const [type_transactions, setTypeTransaction] = useState("Alquiler");
-  const [price, setPrice] = useState("");
-  const [square_mts, setSquareMts] = useState("");
-  const [rooms, setRooms] = useState("");
-  const [bathroom, setBathrooms] = useState("");
-  const [address, setAddress] = useState("");
-  const [image_url, setImageUrl] = useState("");
 
-  const handleChangeTitle = (event) => {
-    setTitle(event.target.value);
-  };
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    type_property: "",
+    type_transactions: "",
+    price: "",
+    square_mts: "",
+    rooms: "",
+    bathroom: "",
+    address: "",
+    image_url: "",
+  });
 
-  const handleChangeDescription = (event) => {
-    setDescription(event.target.value);
-  };
-
-  const handleChangeRooms = (event) => {
-    setRooms(event.target.value);
-  };
-
-  const handleChangeBathrooms = (event) => {
-    setBathrooms(event.target.value);
-  };
-
-  const handleChangeSquareMts = (event) => {
-    setSquareMts(event.target.value);
-  };
-
-  const handleChangeAdress = (event) => {
-    setAddress(event.target.value);
-  };
-
-  const handleChangePrice = (event) => {
-    setPrice(event.target.value);
-  };
-
-  const handleChangeTypeProperty = (event) => {
-    setTypeProperty(event.target.value);
-  };
-
-  const handleChangeTypeTransaction = (event) => {
-    setTypeTransaction(event.target.value);
-  };
-
-  const handleChangeImageUrl = (event) => {
-    setImageUrl(event.target.value);
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   useEffect(() => {
@@ -65,20 +36,14 @@ const AddProperty = () => {
       });
   }, []);
 
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const propertyData = {
-      title: title,
-      description: description,
-      type_property: type_property,
-      type_transactions: type_transactions,
-      price: parseFloat(price),
-      square_mts: parseInt(square_mts, 10),
-      rooms: parseInt(rooms, 10),
-      bathroom: parseInt(bathroom, 10),
-      address: address,
-      image_url: image_url,
+      ...formData,
+      price: parseFloat(formData.price),
+      square_mts: parseInt(formData.square_mts, 10),
+      rooms: parseInt(formData.rooms, 10),
+      bathroom: parseInt(formData.bathroom, 10),
     };
 
     fetch("http://localhost:3000/houses", {
@@ -96,16 +61,19 @@ const AddProperty = () => {
         return res.json();
       })
       .then((propertyData) => {
-        setTitle("");
-        setDescription("");
-        setTypeProperty("Departamento");
-        setTypeTransaction("Alquiler");
-        setPrice("");
-        setSquareMts("");
-        setRooms("");
-        setBathrooms("");
-        setAddress("");
-        setImageUrl("");
+        setFormData({
+          title: "",
+          description: "",
+          type_property: "Departamento",
+          type_transactions: "Alquiler",
+          price: "",
+          square_mts: "",
+          rooms: "",
+          bathroom: "",
+          address: "",
+          image_url: "",
+        });
+        alert("Propiedad añadida!");
       })
       .catch((error) => {
         console.log("Error detallado:", error.message);
@@ -123,19 +91,21 @@ const AddProperty = () => {
             <Form.Group as={Col} controlId="formGridEmail">
               <Form.Label>Titulo de la propiedad</Form.Label>
               <Form.Control
+                name="title"
                 type="text"
                 placeholder="Ingrese titulo de la propiedad"
-                onChange={handleChangeTitle}
-                value={title}
+                onChange={handleChange}
+                value={formData.title}
               />
             </Form.Group>
             <Form.Group as={Col} controlId="formGridPassword">
               <Form.Label>Descripcion</Form.Label>
               <Form.Control
+                name="description"
                 type="text"
                 placeholder="Ingrese descripcion"
-                onChange={handleChangeDescription}
-                value={description}
+                onChange={handleChange}
+                value={formData.description}
               />
             </Form.Group>
           </Row>
@@ -143,28 +113,31 @@ const AddProperty = () => {
             <Form.Group as={Col} controlId="formGridCity">
               <Form.Label>Habitaciones</Form.Label>
               <Form.Control
+                name="rooms"
                 type="number"
                 placeholder="Ingrese cantidad de habitaciones"
-                onChange={handleChangeRooms}
-                value={rooms}
+                onChange={handleChange}
+                value={formData.rooms}
               />
             </Form.Group>
             <Form.Group as={Col} controlId="formGridCity">
               <Form.Label>Baños</Form.Label>
               <Form.Control
+                name="bathroom"
                 type="number"
                 placeholder="Ingrese cantidad de baños"
-                onChange={handleChangeBathrooms}
-                value={bathroom}
+                onChange={handleChange}
+                value={formData.bathroom}
               />
             </Form.Group>
             <Form.Group as={Col} controlId="formGridCity">
               <Form.Label>Metros cuadrados</Form.Label>
               <Form.Control
+                name="square_mts"
                 type="text"
                 placeholder="Ingrese cantidad de metros cuadrados"
-                onChange={handleChangeSquareMts}
-                value={square_mts}
+                onChange={handleChange}
+                value={formData.square_mts}
               />
             </Form.Group>
           </Row>
@@ -172,39 +145,43 @@ const AddProperty = () => {
             <Form.Group as={Col} controlId="formGridCity">
               <Form.Label>Dirección</Form.Label>
               <Form.Control
+                name="address"
                 type="text"
                 placeholder="Ingrese la dirección"
-                onChange={handleChangeAdress}
-                value={address}
+                onChange={handleChange}
+                value={formData.address}
               />
             </Form.Group>
             <Form.Group as={Col} controlId="formGridCity">
               <Form.Label>Precio en USD</Form.Label>
               <Form.Control
+                name="price"
                 type="text"
                 placeholder="Ingrese el precio"
-                onChange={handleChangePrice}
-                value={price}
+                onChange={handleChange}
+                value={formData.price}
               />
             </Form.Group>
           </Row>
           <Row className="mb-3">
-            <Form.Group as={Col} controlId="miDesplegable">
+            <Form.Group as={Col} controlId="dropdown-type-property">
               <Form.Label>Tipo de propiedad</Form.Label>
               <Form.Select
-                onChange={handleChangeTypeProperty}
-                value={type_property}
+                name="type_property"
+                onChange={handleChange}
+                value={formData.type_property}
                 aria-label="Selector de ejemplo"
               >
                 <option value="Departamento">Departamento</option>
                 <option value="Casa">Casa</option>
               </Form.Select>
             </Form.Group>
-            <Form.Group as={Col} controlId="miDesplegable">
+            <Form.Group as={Col} controlId="dropdown-type-transaction">
               <Form.Label>Tipo de transacción</Form.Label>
               <Form.Select
-                onChange={handleChangeTypeTransaction}
-                value={type_transactions}
+                name="type_transactions"
+                onChange={handleChange}
+                value={formData.type_transactions}
                 aria-label="Selector de ejemplo"
               >
                 <option value="Alquiler">Alquiler</option>
@@ -216,10 +193,11 @@ const AddProperty = () => {
             <Form.Group as={Col} controlId="formGridCity">
               <Form.Label>Imagen de la propiedad</Form.Label>
               <Form.Control
+                name="image_url"
                 type="text"
                 placeholder="Ingrese la dirección URL de la imagen"
-                onChange={handleChangeImageUrl}
-                value={image_url}
+                onChange={handleChange}
+                value={formData.image_url}
               />
             </Form.Group>
           </Row>
