@@ -46,6 +46,23 @@ export const Properties = sequelize.define("Properties", {
     image_url: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    pet_friendly: {
+        type: DataTypes.ENUM(
+            "Si",
+            "No"
+        ),
+        defaultValue: "No",
+        allowNull: false
+    },
+    state_property: {
+        type: DataTypes.ENUM(
+            "Sin Reservas",
+            "Reservada",
+            "Vendida"
+        ),
+        defaultValue: "Sin Reservas",
+        allowNull: false
     }
 },
 {

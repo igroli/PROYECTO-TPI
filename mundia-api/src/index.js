@@ -22,12 +22,12 @@ async function createDB() {
     
     app.listen(PORT);
 
-    await sequelize.sync();
+    await sequelize.sync({ alter: true });
     console.log("Data base succesfully synchronized!");
-
+22
     console.log(`Server listening on port ${PORT}`);
   } catch (error) {
-    console.log(`There was an error on initialization`);
+    console.log(`There was an error on initialization`, error);
   }
 }
 
