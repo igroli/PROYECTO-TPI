@@ -10,6 +10,10 @@ const Outlet = () => {
 
   return (
     <div className="outlet-container">
+      
+      <h1>Mundia Propiedades</h1>
+      <Button onClick={() => navigate("/onsaleprop")}>Comprar</Button>
+      <Button onClick={() => navigate("/onrentprop")}>Alquilar</Button>
       <input
         className="outlet-container-input"
         type="text"
@@ -19,7 +23,7 @@ const Outlet = () => {
       <Button onClick={() => navigate("/addproperty")}>
         Agregar propiedad
       </Button>
-      {/* sacar este boton despues y ponerlo en el admin panel */}
+      {/* sacar boton despues y ponerlo en el admin panel */}
     </div>
   );
 };
