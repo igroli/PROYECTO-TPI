@@ -48,11 +48,8 @@ export const Properties = sequelize.define("Properties", {
         allowNull: false
     },
     pet_friendly: {
-        type: DataTypes.ENUM(
-            "Si",
-            "No"
-        ),
-        defaultValue: "No",
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
         allowNull: false
     },
     state_property: {
