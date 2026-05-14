@@ -9,21 +9,24 @@ const AddProperty = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    type_property: "",
-    type_transactions: "",
+    type_property: "Departamento",
+    type_transactions: "Alquiler",
     price: "",
     square_mts: "",
-    rooms: "",
-    bathroom: "",
+    rooms: "0",
+    bathroom: "1",
     address: "",
     image_url: "",
+    pet_friendly: false,
+    state_property: "Sin reservas",
   });
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, type, checked, value } = event.target;
     setFormData({
       ...formData,
       [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
@@ -72,6 +75,8 @@ const AddProperty = () => {
           bathroom: "",
           address: "",
           image_url: "",
+          pet_friendly: false,
+          state_property: "Sin Reservas",
         });
         alert("Propiedad añadida!");
       })
@@ -202,7 +207,13 @@ const AddProperty = () => {
             </Form.Group>
           </Row>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Es pet friendly?" />
+            <Form.Check
+              type="checkbox"
+              label="¿Es pet friendly?"
+              name="pet_friendly"
+              checked={formData.pet_friendly}
+              onChange={handleChange}
+            />{" "}
           </Form.Group>
           <Button variant="primary" type="submit">
             Enviar formulario
