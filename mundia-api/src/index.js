@@ -4,9 +4,9 @@ import authRoutes from "./routes/auth.routes.js";
 import { PORT } from "./config.js";
 import { sequelize } from "../db.js";
 import "./models/associations.js";
-import "./models/Users.js"
 
 const app = express();
+
 async function createDB() {
   try {
     app.use(express.json());
@@ -24,7 +24,7 @@ async function createDB() {
 
     await sequelize.sync({ alter: true });
     console.log("Data base succesfully synchronized!");
-22
+
     console.log(`Server listening on port ${PORT}`);
   } catch (error) {
     console.log(`There was an error on initialization`, error);
