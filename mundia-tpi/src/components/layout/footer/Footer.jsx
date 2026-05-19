@@ -1,4 +1,4 @@
-import ContactForm from '../contactForm/ContactForm'
+import ContactForm from '../../ui/contactForm/ContactForm';
 import './Footer.css'
 import { useNavigate } from "react-router"
 

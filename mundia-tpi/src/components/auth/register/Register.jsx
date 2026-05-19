@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Form, Button } from "react-bootstrap";
 import "./Register.css";
-import Footer from "../footer/Footer";
-import NavBar from "../navBar/NavBar";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -73,7 +71,6 @@ const Register = () => {
 
   return (
     <>
-      <NavBar />
       <div className="register-container">
         <Form onSubmit={handleSubmit}>
           <div className="form-row">
@@ -149,7 +146,6 @@ const Register = () => {
           <Button type="submit">Registrarse</Button>
         </Form>
       </div>
-      <Footer />
     </>
   );
 };

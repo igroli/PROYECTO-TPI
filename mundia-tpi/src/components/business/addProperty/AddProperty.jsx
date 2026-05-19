@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import Footer from "../footer/Footer";
-import NavBar from "../navBar/NavBar";
+import Footer from "../../layout/footer/Footer";
+import NavBar from "../../layout/navBar/NavBar";
 import { Form, Row, Col, Button } from "react-bootstrap";
-
+import { successToast } from "../../ui/notifications/notifications";
 const AddProperty = () => {
   const [properties, setProperties] = useState([]);
 
@@ -18,7 +18,7 @@ const AddProperty = () => {
     address: "",
     image_url: "",
     pet_friendly: false,
-    state_property: "Sin reservas",
+    state_property: "Sin Reservas",
   });
 
   const handleChange = (event) => {
@@ -72,24 +72,22 @@ const AddProperty = () => {
           price: "",
           square_mts: "",
           rooms: "",
-          bathroom: "",
+          bathroom: "", // LIMPIO INPUTS
           address: "",
           image_url: "",
           pet_friendly: false,
           state_property: "Sin Reservas",
         });
-        alert("Propiedad añadida!");
+        successToast("Propiedad añadida!");
       })
       .catch((error) => {
         console.log("Error detallado:", error.message);
       });
-    // LIMPIO INPUTS
     console.log(propertyData);
   };
 
   return (
     <div>
-      <NavBar />
       <div className="contact-form-container">
         <Form onSubmit={handleSubmit}>
           <Row className="mb-3">
@@ -220,7 +218,6 @@ const AddProperty = () => {
           </Button>
         </Form>
       </div>
-      <Footer />
     </div>
   );
 };

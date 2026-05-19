@@ -1,7 +1,7 @@
-import NavBar from "../navBar/NavBar";
-import Footer from "../footer/Footer";
+import NavBar from "../../layout/navBar/NavBar";
+import Footer from "../../layout/footer/Footer";
 import "./Propiedades.css";
-import HouseCard from "../houseCard/HouseCard";
+import HouseCard from "../../business/houseCard/HouseCard";
 import { useEffect, useState } from "react";
 
 const Propiedades = () => {
@@ -19,13 +19,11 @@ const Propiedades = () => {
 
   return (
     <div className="propiedades-container">
-      <NavBar />
       <div className="propiedades-content">
         {houses.map((house) => (
           <HouseCard key={house.id} house={house} />
         ))}
       </div>
-      <Footer />
     </div>
   );
 };

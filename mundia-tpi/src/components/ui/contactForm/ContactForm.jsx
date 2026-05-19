@@ -1,13 +1,10 @@
 import { Form, Row, Col, Button } from "react-bootstrap";
 import "./ContactForm.css";
-import "../../index.css";
-import NavBar from "../navBar/NavBar";
-import Footer from "../footer/Footer";
+import "../../../index.css";
 
 const ContactForm = () => {
   return (
     <>
-      <NavBar />
       <div className="contact-form-container">
         <Form>
           <Row className="mb-3">
@@ -44,7 +41,6 @@ const ContactForm = () => {
           </Button>
         </Form>
       </div>
-      <Footer />
     </>
   );
 };

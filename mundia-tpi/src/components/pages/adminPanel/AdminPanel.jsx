@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import AddProperty from '../addProperty/AddProperty'
+import AddProperty from '../../business/addProperty/AddProperty'
 
 const AdminPanel = () => {
 
