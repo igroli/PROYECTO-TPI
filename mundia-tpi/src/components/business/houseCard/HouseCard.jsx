@@ -6,12 +6,14 @@ const HouseCard = ({ house }) => {
   return (
     <div>
       <Card className="house-card">
-        <Card.Img variant="top" src={house.image_url} />
-        <Card.Body>
-          <Card.Title>{house.title}</Card.Title>
-          <Card.Text>{house.description}</Card.Text>
-          <Button variant="primary">Ver detalles</Button>
-        </Card.Body>
+        <div className="house-card__content">
+          <Card.Img variant="top" src={house.image_url} className="house-card__image" />
+          <Card.Body className="house-card__body">
+            <Card.Title className="house-card__title">{house.title}</Card.Title>
+            <Card.Text className="house-card__text">{house.description}</Card.Text>
+            <Button className="house-card__button">Ver detalles</Button>
+          </Card.Body>
+        </div>
       </Card>
     </div>
   );

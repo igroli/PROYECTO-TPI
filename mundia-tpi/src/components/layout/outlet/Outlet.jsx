@@ -9,20 +9,26 @@ const Outlet = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="outlet-container">
-      <h1>Mundia Propiedades</h1>
-      <Button onClick={() => navigate("/properties")}>Comprar</Button>
-      <Button onClick={() => navigate("/properties")}>Alquilar</Button>
-      <input
-        className="outlet-container-input"
-        type="text"
-        placeholder="Buscar"
-      />
-      <ControlledCarousel />
-      <Button onClick={() => navigate("/addproperty")}>
-        Agregar propiedad
-      </Button>
-      {/* sacar boton despues y ponerlo en el admin panel */}
+    <div className="outlet">
+      <section className="outlet__section-header">
+        <h1 className="outlet__title">Mundia Propiedades</h1>
+        <div className="outlet__buttons-group">
+          <Button onClick={() => navigate("/properties")}>Comprar</Button>
+          <Button onClick={() => navigate("/properties")}>Alquilar</Button>
+        </div>
+        <input
+          className="outlet__search-input"
+          type="text"
+          placeholder="Buscar"
+        />
+      </section>
+      <section className="outlet__section-carousel">
+        <ControlledCarousel />
+        <Button onClick={() => navigate("/addproperty")} className="outlet__add-property-btn">
+          Agregar propiedad
+        </Button>
+        {/* sacar boton despues y ponerlo en el admin panel */}
+      </section>
     </div>
   );
 };
