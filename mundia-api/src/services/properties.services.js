@@ -10,6 +10,20 @@ export const getProperties = async(req, res) => {
     res.json(properties);
 }
 
+// obtener las propiedades y el usuario puede poner un filtro de si es alquiler o venta
+export const getPropertiesFiltered = async (req, res) => {
+  const { type_transactions } = req.query;
+
+  const where = type_transactions ? { type_transactions } : {};
+  console.log("Where: ", where);
+  try {
+    const propiedades = await Properties.findAll({ where });
+    res.json(propiedades);
+  } catch (error) {
+    res.status(500).json({ error: "Error al obtener propiedades" });
+  }
+}
+
 // obtener 6 propiedades al azar para el carrousel
 export const getCarrouselProperties = async (req, res) => {
   try {

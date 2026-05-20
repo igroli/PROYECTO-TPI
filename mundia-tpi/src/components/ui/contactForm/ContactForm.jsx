@@ -3,10 +3,14 @@ import "./ContactForm.css";
 import "../../../index.css";
 
 const ContactForm = () => {
+  
+  const handleSubmit = () => {
+    alert("Un agente se contactara contigo pronto")
+  }
   return (
     <>
       <div className="contact-form-container">
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Row className="mb-3">
             <Form.Group as={Col} controlId="formGridEmail">
               <Form.Label>Email</Form.Label>

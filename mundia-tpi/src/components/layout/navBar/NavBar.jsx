@@ -42,7 +42,7 @@ const NavBar = ({ loggedIn, onLogOut }) => {
                 height="30"
                 className="d-inline-block align-top"
                 alt="Login"
-                style={{ filter: "brightness(0) invert(1)" }} // Si tu icono es oscuro, esto lo pone blanco
+                style={{ filter: "brightness(0) invert(1)" }}
               />
             </div>
 
