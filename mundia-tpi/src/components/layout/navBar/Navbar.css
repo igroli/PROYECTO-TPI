@@ -74,7 +74,6 @@
     padding: 0.5rem 0;
   }
 }
-/* --- Overlay (Fondo oscuro) --- */
 .drawer-overlay {
   position: fixed;
   top: 0;
@@ -82,7 +81,7 @@
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(2px); /* Efecto elegante */
+  backdrop-filter: blur(2px);
   z-index: 1040; 
   opacity: 0;
   pointer-events: none;
@@ -94,14 +93,13 @@
   pointer-events: auto;
 }
 
-/* --- Contenedor del Drawer --- */
 .user-drawer {
   position: fixed;
   top: 0;
   right: 0;
   width: 320px;
   height: 100vh;
-  background: white; /* O usa var(--bg-secondary) si es clara */
+  background: white; 
   z-index: 1050;
   box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
   transform: translateX(100%);
@@ -114,7 +112,7 @@
   transform: translateX(0);
 }
 
-/* --- Header del Drawer --- */
+
 .drawer-header {
   padding: 1.5rem;
   background: linear-gradient(90deg, var(--primary) 0%, var(--bg-secondary) 100%);
@@ -128,7 +126,7 @@
   margin: 0;
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--secondary); /* Color dorado/amarillo de tu logo */
+  color: var(--secondary); 
 }
 
 .close-btn {
@@ -140,7 +138,6 @@
   line-height: 1;
 }
 
-/* --- Contenido del Drawer --- */
 .drawer-content {
   padding: 1.5rem;
   display: flex;

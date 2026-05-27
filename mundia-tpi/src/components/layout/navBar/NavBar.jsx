@@ -1,4 +1,4 @@
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar, Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import logo from "../../../assets/logo/logo_mundia.png";
@@ -54,42 +54,66 @@ const NavBar = ({ loggedIn, onLogOut }) => {
             <div className={`user-drawer ${showDrawer ? "open" : ""}`}>
               <div className="drawer-header">
                 <h3>{loggedIn ? "Mi Cuenta" : "Bienvenido"}</h3>
-                <button className="close-btn" onClick={toggleDrawer}>
+                <Button 
+                  variant="link" 
+                  className="close-btn" 
+                  onClick={toggleDrawer}
+                  aria-label="Cerrar menú"
+                >
                   &times;
-                </button>
+                </Button>
               </div>
 
               <div className="drawer-content">
                 {loggedIn ? (
                   <div className="menu-list">
-                    <button onClick={() => handleNavigation("/profile")}>
+                    <Button 
+                      variant="link" 
+                      className="w-100 text-start"
+                      onClick={() => handleNavigation("/myprofile")}
+                    >
                       Mi Perfil
-                    </button>
-                    <button onClick={() => handleNavigation("/myreservations")}>
+                    </Button>
+                    <Button 
+                      variant="link" 
+                      className="w-100 text-start"
+                      onClick={() => handleNavigation("/myreservations")}
+                    >
                       Mis Reservas
-                    </button>
-                    <button onClick={() => handleNavigation("/favorites")}>
+                    </Button>
+                    <Button 
+                      variant="link" 
+                      className="w-100 text-start"
+                      onClick={() => handleNavigation("/favorites")}
+                    >
                       Favoritos
-                    </button>
+                    </Button>
                     <hr />
-                    <button className="logout-btn" onClick={onLogOut}>
+                    <Button 
+                      className="logout-btn w-100" 
+                      onClick={onLogOut}
+                    >
                       Cerrar Sesión
-                    </button>
+                    </Button>
                   </div>
                 ) : (
                   <div className="login-prompt">
                     <p>Inicia sesión para ver tus propiedades favoritas.</p>
-                    <button
-                      className="login-btn-primary"
+                    <Button
+                      className="login-btn-primary w-100"
                       onClick={() => handleNavigation("/login")}
                     >
                       Iniciar Sesión
-                    </button>
-                    <p className="register-text" style={{ cursor: "pointer" }}>
+                    </Button>
+                    <p className="register-text">
                       ¿No tienes cuenta?{" "}
-                      <span onClick={() => handleNavigation("/register")}>
+                      <Button 
+                        variant="link" 
+                        className="p-0"
+                        onClick={() => handleNavigation("/register")}
+                      >
                         Regístrate
-                      </span>
+                      </Button>
                     </p>
                   </div>
                 )}

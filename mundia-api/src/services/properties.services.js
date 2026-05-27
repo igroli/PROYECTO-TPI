@@ -1,6 +1,3 @@
-// tabla roles (USUARIO AGENTE SUPERADMIN)
-// agregar var vendida var reservada agregar vr petfriendly true false
-// hashear contraseñas
 import { Properties } from "../models/Properties.js";
 import { sequelize } from "../../db.js";
 
@@ -75,23 +72,11 @@ export const createProperty = async (req, res) => {
   }
 };
 
-// crear usuario 2
-// crear propiedad 1
+
 // crear favoritos 4 
 // crear reserva 3
 // crear agente 5
 
-// get propiedades 1
 // get favoritos
 // get agentes 2
-// get algunas casas dependiendo de la busqueda3
 // get las reservas del usuario
-
-// actualizar propiedad
-// actualizar usuario desde mi perfil 
-// actualizar reserva desde el lado agente
-
-// eliminar casa
-// eliminar usuario ( solo super admin)
-// elimiinar reservas ( del cliente o del agente )
-// eliminar de favoritos

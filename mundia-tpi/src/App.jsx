@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import Outlet from "./components/layout/outlet/Outlet";
-import NotFound from "./components/pages/notFound/NotFound"
+import NotFound from "./components/pages/notFound/NotFound";
 import ContactForm from "./components/ui/contactForm/ContactForm";
 import AboutUs from "./components/pages/aboutUs/AboutUs";
 import Propiedades from "./components/pages/propiedades/Propiedades";
@@ -11,6 +11,8 @@ import { useState } from "react";
 import NavBar from "./components/layout/navBar/NavBar";
 import Footer from "./components/layout/footer/Footer";
 import MyReservations from "./components/pages/myReservations/MyReservations";
+import UserPage from "./components/auth/userPage/UserPage";
+import Protected from "./components/auth/protected/Protected";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -26,22 +28,46 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <NavBar loggedIn={loggedIn} onLogOut={handleLogOut}/>
+        <NavBar loggedIn={loggedIn} onLogOut={handleLogOut} />
         <Routes>
           <Route path="/" element={<Outlet />} />
           <Route path="/*" element={<NotFound />} />
           <Route path="/contact" element={<ContactForm />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/properties" element={<Propiedades />} />
-          <Route path="/login" element={<Login onLogIn={handleLogIn} loggedIn={loggedIn}/>} />
+          <Route
+            path="/login"
+            element={<Login onLogIn={handleLogIn} loggedIn={loggedIn} />}
+          />
           <Route path="/register" element={<Register />} />
-          <Route path="/addproperty" element={<AdminPanel />} />
-          <Route path="/myreservations" element={<MyReservations />}/>
+
+          <Route
+            path="/addproperty"
+            element={
+              <Protected loggedIn={loggedIn}>
+                <AdminPanel />
+              </Protected>
+            }
+          />
+          <Route
+            path="/myreservations"
+            element={
+              <Protected loggedIn={loggedIn}>
+                <MyReservations />
+              </Protected>
+            }
+          />
+          <Route
+            path="/myprofile"
+            element={
+              <Protected loggedIn={loggedIn}>
+                <UserPage onLogOut={handleLogOut}/>
+              </Protected>
+            }
+          />
         </Routes>
         <Footer />
       </BrowserRouter>
-
-
     </div>
   );
 }

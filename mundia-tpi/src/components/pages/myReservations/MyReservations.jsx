@@ -1,7 +1,8 @@
 import React from "react";
-import { Calendar, Clock, MapPin, Home, Trash2 } from "lucide-react"; // Iconos para mejor UI
+import { Calendar, Clock, MapPin, Home, Trash2 } from "lucide-react"; 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { Container, Row, Col, Card, Button, Badge } from "react-bootstrap";
 
 const MyReservations = () => {
   const navigate = useNavigate();
@@ -30,47 +31,49 @@ const MyReservations = () => {
   ];
 
   return (
-    <div className="container py-5" style={{ minHeight: "80vh" }}>
-      <div className="row mb-4">
-        <div className="col">
+    <Container className="py-5" style={{ minHeight: "80vh" }}>
+      <Row className="mb-4">
+        <Col>
           <h2 className="fw-bold border-bottom pb-2">
             Mis Visitas Programadas
           </h2>
           <p className="text-muted">
             Gestiona tus próximas visitas a las propiedades de Mundia.
           </p>
-        </div>
-      </div>
+        </Col>
+      </Row>
 
-      <div className="row">
+      <Row>
         {reservations.length > 0 ? (
           reservations.map((res) => (
-            <div className="col-12 mb-3" key={res.id}>
-              <div className="card shadow-sm border-0 overflow-hidden h-100">
-                <div className="row g-0">
-                  <div className="col-md-3">
+            <Col xs={12} className="mb-3" key={res.id}>
+              <Card className="shadow-sm border-0 overflow-hidden h-100">
+                <Row className="g-0">
+                  <Col md={3}>
                     <img
                       src={res.image}
                       className="img-fluid h-100 w-100 object-fit-cover"
                       alt={res.propertyTitle}
                     />
-                  </div>
+                  </Col>
 
-                  <div className="col-md-6 p-4">
+                  <Col md={6} className="p-4">
                     <div className="d-flex align-items-center mb-2">
-                      <span
-                        className={`badge ${res.status === "Confirmada" ? "bg-success" : "bg-warning text-dark"} me-2`}
+                      <Badge
+                        bg={res.status === "Confirmada" ? "success" : "warning"}
+                        text={res.status === "Confirmada" ? "white" : "dark"}
+                        className="me-2"
                       >
                         {res.status}
-                      </span>
+                      </Badge>
                       <small className="text-muted">
                         ID Reserva: #{res.id}
                       </small>
                     </div>
 
-                    <h4 className="card-title fw-bold mb-3">
+                    <Card.Title className="fw-bold mb-3">
                       {res.propertyTitle}
-                    </h4>
+                    </Card.Title>
 
                     <div className="d-flex flex-column gap-2">
                       <div className="d-flex align-items-center text-secondary">
@@ -86,36 +89,35 @@ const MyReservations = () => {
                         <span>{res.time}</span>
                       </div>
                     </div>
-                  </div>
-                  <div className="col-md-3 d-flex flex-column justify-content-center p-4 border-start bg-light">
-                    <button className="btn btn-outline-primary mb-2 d-flex align-items-center justify-content-center gap-2">
+                  </Col>
+                  <Col md={3} className="d-flex flex-column justify-content-center p-4 border-start bg-light">
+                    <Button variant="outline-primary" className="mb-2 d-flex align-items-center justify-content-center gap-2">
                       <Home size={16} /> Ver Propiedad
-                    </button>
-                    {/* en ver propiedad vamos a dirigir al mismo lugar que ver detalles en la houseCard */}
-                    <button className="btn btn-outline-danger d-flex align-items-center justify-content-center gap-2">
+                    </Button>
+                    <Button variant="outline-danger" className="d-flex align-items-center justify-content-center gap-2">
                       <Trash2 size={16} /> Cancelar Visita
-                    </button>
-                    {/* en cancelar visitas debemos hacer delete a la fila de reservas */}
-                  </div>
-                </div>
-              </div>
-            </div>
+                    </Button>
+                  </Col>
+                </Row>
+              </Card>
+            </Col>
           ))
         ) : (
-          <div className="col-12 text-center py-5">
+          <Col xs={12} className="text-center py-5">
             <h5 className="text-muted">
               No tienes visitas programadas actualmente.
             </h5>
-            <button
-              className="btn btn-primary mt-3"
+            <Button
+              variant="primary"
+              className="mt-3"
               onClick={() => navigate("/properties")}
             >
               Explorar Propiedades
-            </button>
-          </div>
+            </Button>
+          </Col>
         )}
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
 };
 

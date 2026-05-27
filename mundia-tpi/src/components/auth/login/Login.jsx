@@ -62,8 +62,8 @@ import { errorToast } from "../../ui/notifications/notifications";
         }
         return res.json();
       })
-      .then((token) => {
-        localStorage.setItem("mundia-token", token);
+      .then((data) => {
+        localStorage.setItem("token", data);
         navigate("/");
       })
       .catch((err) => errorToast(err.message));
