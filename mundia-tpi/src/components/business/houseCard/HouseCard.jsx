@@ -1,8 +1,11 @@
 import React from "react";
 import { Button, Card } from "react-bootstrap";
 import "./HouseCard.css";
+import { useNavigate } from "react-router";
 
 const HouseCard = ({ house }) => {
+const navigate = useNavigate();
+
   return (
     <div>
       <Card className="house-card">
@@ -11,7 +14,7 @@ const HouseCard = ({ house }) => {
           <Card.Body className="house-card__body">
             <Card.Title className="house-card__title">{house.title}</Card.Title>
             <Card.Text className="house-card__text">{house.description}</Card.Text>
-            <Button className="house-card__button">Ver detalles</Button>
+            <Button className="house-card__button" onClick={() => navigate(`/properties/${house.id_properties}`)} >Ver detalles</Button>
           </Card.Body>
         </div>
       </Card>

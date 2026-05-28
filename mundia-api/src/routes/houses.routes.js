@@ -4,14 +4,14 @@ import {
   getProperties,
   getProperty,
   getCarrouselProperties,
-  getPropertiesFiltered,
+  getPropertiesFiltered
 } from "../services/properties.services.js";
 
 const router = Router();
 
 router.get("/randomhouses", getCarrouselProperties);
 
-router.get("/house/:id", getProperty);
+router.get("/house/:id", getProperty);           /* <----- ruta obtener datos de la propiedad por ID */
 
 router.get("/propiedades", getPropertiesFiltered);
 

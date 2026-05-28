@@ -1,6 +1,6 @@
 import "./Propiedades.css";
 import HouseCard from "../../business/houseCard/HouseCard";
-import { useEffect, useState  } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
 const Propiedades = () => {
@@ -27,7 +27,7 @@ const Propiedades = () => {
     <div className="propiedades-container">
       <div className="propiedades-content">
         {houses.map((house) => (
-          <HouseCard key={house.id} house={house} />
+          <HouseCard key={house.id_properties} house={house} />
         ))}
       </div>
     </div>

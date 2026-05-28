@@ -11,8 +11,12 @@ import { useState } from "react";
 import NavBar from "./components/layout/navBar/NavBar";
 import Footer from "./components/layout/footer/Footer";
 import MyReservations from "./components/pages/myReservations/MyReservations";
+<<<<<<< HEAD
 import UserPage from "./components/auth/userPage/UserPage";
 import Protected from "./components/auth/protected/Protected";
+=======
+import PropertyDetails from "./components/business/propertyDetails/PropertyDetails";
+>>>>>>> 4927648 (creacion de PropertyDetails junto a sus estilos)
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -40,6 +44,7 @@ function App() {
             element={<Login onLogIn={handleLogIn} loggedIn={loggedIn} />}
           />
           <Route path="/register" element={<Register />} />
+<<<<<<< HEAD
 
           <Route
             path="/addproperty"
@@ -65,6 +70,11 @@ function App() {
               </Protected>
             }
           />
+=======
+          <Route path="/addproperty" element={<AdminPanel />} />
+          <Route path="/myreservations" element={<MyReservations />}/>
+          <Route path="/properties/:id" element={<PropertyDetails/>} />
+>>>>>>> 4927648 (creacion de PropertyDetails junto a sus estilos)
         </Routes>
         <Footer />
       </BrowserRouter>

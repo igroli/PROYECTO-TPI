@@ -43,8 +43,6 @@ export const getProperty = async (req, res) => {
         return res.status(404).send({ message: "Propiedad no encontrada"});
     }
     res.json(property) 
-
-
 }
 
 // post propiedad
