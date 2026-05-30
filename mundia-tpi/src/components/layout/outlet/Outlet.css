@@ -80,7 +80,7 @@
   box-shadow: 0 2px 8px rgba(184, 147, 94, 0.4);
 }
 
-.outlet__search-input {
+/* .outlet__search-input {
   padding: 0.8rem 1.5rem;
   border: 2px solid var(--secondary);
   border-radius: 12px;
@@ -107,7 +107,7 @@
 .outlet__search-input:hover {
   border-color: #b8935e;
   box-shadow: 0 6px 16px rgba(194, 165, 109, 0.15);
-}
+} */
 
 .outlet__section-carousel {
   display: flex;

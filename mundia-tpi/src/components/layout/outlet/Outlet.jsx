@@ -18,11 +18,11 @@ const Outlet = () => {
           <Button onClick={() => navigate("/properties?type_transactions=Venta")}>Comprar</Button>
           <Button onClick={() => navigate("/properties?type_transactions=Alquiler")}>Alquilar</Button>
         </div>
-        <input
+        {/* <input
           className="outlet__search-input"
           type="text"
           placeholder="Buscar"
-        />
+        /> */}
       </section>
       <section className="outlet__section-carousel">
         <ControlledCarousel />

@@ -90,35 +90,29 @@ const PropertyDetails = () => {
 
           <div className="property-details__specs-grid">
             <div className="property-details__spec-item">
-              <span className="property-details__spec-icon">📏</span>
               <div className="property-details__spec-content">
                 <p className="property-details__spec-label">{square_mts} m² totales</p>
               </div>
             </div>
 
             <div className="property-details__spec-item">
-              <span className="property-details__spec-icon">🛏️</span>
               <div className="property-details__spec-content">
                 <p className="property-details__spec-label">{rooms} habitaciones</p>
               </div>
             </div>
 
             <div className="property-details__spec-item">
-              <span className="property-details__spec-icon">🚿</span>
               <div className="property-details__spec-content">
                 <p className="property-details__spec-label">{bathroom} baños</p>
               </div>
             </div>
 
             <div className="property-details__spec-item">
-              <span className="property-details__spec-icon">{pet_friendly ? "🐕" : "❌"}</span>
               <div className="property-details__spec-content">
                 <p className="property-details__spec-label">{pet_friendly ? "Mascotas permitidas" : "No se permiten mascotas"}</p>
               </div>
             </div>
           </div>
-
-          <p className="property-details__address-text">📍 {address}</p>
 
           <p className="property-details__description">{description}</p>
           
