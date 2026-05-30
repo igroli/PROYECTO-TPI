@@ -14,22 +14,14 @@ import MyReservations from "./components/pages/myReservations/MyReservations";
 import UserPage from "./components/auth/userPage/UserPage";
 import Protected from "./components/auth/protected/Protected";
 import PropertyDetails from "./components/business/propertyDetails/PropertyDetails";
+import CalendarReservation from "./components/business/calendarReservation/CalendarReservation";
+import AddAgents from "./components/business/addAgents/AddAgents";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  const handleLogIn = () => {
-    setLoggedIn(true);
-  };
-
-  const handleLogOut = () => {
-    setLoggedIn(false);
-  };
-
   return (
     <div>
       <BrowserRouter>
-        <NavBar loggedIn={loggedIn} onLogOut={handleLogOut} />
+        <NavBar />
         <Routes>
           <Route path="/" element={<Outlet />} />
           <Route path="/contact" element={<ContactForm />} />
@@ -38,21 +30,29 @@ function App() {
           <Route path="/properties/:id" element={<PropertyDetails />} />
           <Route
             path="/login"
-            element={<Login onLogIn={handleLogIn} loggedIn={loggedIn} />}
+            element={<Login />}
           />
           <Route path="/register" element={<Register />} />
           <Route
             path="/addproperty"
             element={
-              <Protected loggedIn={loggedIn}>
+              <Protected >
                 <AdminPanel />
+              </Protected>
+            }
+          />
+          <Route
+            path="/addagents"
+            element={
+              <Protected >
+                <AddAgents />
               </Protected>
             }
           />
           <Route
             path="/myreservations"
             element={
-              <Protected loggedIn={loggedIn}>
+              <Protected >
                 <MyReservations />
               </Protected>
             }
@@ -60,8 +60,16 @@ function App() {
           <Route
             path="/myprofile"
             element={
-              <Protected loggedIn={loggedIn}>
-                <UserPage onLogOut={handleLogOut} />
+              <Protected>
+                <UserPage />
+              </Protected>
+            }
+          />
+          <Route
+            path="/reserve"
+            element={
+              <Protected>
+                <CalendarReservation />
               </Protected>
             }
           />

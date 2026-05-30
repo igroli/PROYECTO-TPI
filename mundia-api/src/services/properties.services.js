@@ -48,7 +48,7 @@ export const getProperty = async (req, res) => {
 // post propiedad
 export const createProperty = async (req, res) => {
   try {
-    const { title, description, type_property, type_transactions, price, square_mts, rooms, bathroom, address, image_url, pet_friendly, state_property } = req.body;
+    const { title, description, type_property, type_transactions, price, square_mts, rooms, bathroom, address, image_url, pet_friendly, state_property, id_agents } = req.body;
 
     const newProperty = await Properties.create({
         title,
@@ -62,7 +62,8 @@ export const createProperty = async (req, res) => {
         address,
         image_url,
         pet_friendly,
-        state_property
+        state_property,
+        id_agents
     });
     res.json(newProperty);
   } catch (error) {

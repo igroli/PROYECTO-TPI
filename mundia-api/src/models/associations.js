@@ -7,6 +7,15 @@ import { Reservations } from "./Reservations.js";
 import { Favorites } from "./Favorites.js";
 import { Roles } from "./Roles.js";
 
+Agents.hasMany(Properties, {
+    foreignKey: 'id_agents'
+});
+
+Properties.belongsTo(Agents, {
+    foreignKey: 'id_agents'
+});
+
+// relacion propiedades reservas
 Properties.hasMany(Reservations, {
     foreignKey: 'id_properties',
      onDelete: 'CASCADE'

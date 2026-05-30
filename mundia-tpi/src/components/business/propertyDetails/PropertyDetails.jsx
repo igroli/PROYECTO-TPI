@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import "./PropertyDetails.css";
+import CalendarReservation from "../calendarReservation/CalendarReservation";
+import { AuthenticationContext } from "../../auth/auth.context";
 
 const PropertyDetails = () => {
   const { id } = useParams();
@@ -8,9 +10,19 @@ const PropertyDetails = () => {
   const [error, setError] = useState(null);
   const [property, setProperty] = useState(null);
 
+  const { token } = useContext(AuthenticationContext);
   const volver = () => {
     navigate('/properties')
   };
+
+  const handleReservationNav = () => {
+    if(!token) {
+      alert("Debe iniciar sesión para agendar una visita.");
+      navigate('/login');
+    } else {
+      navigate('/reserve', { state: { id }});
+    }
+  }
 
   useEffect(() => {
     const fetchProperty = async () => {
@@ -122,7 +134,7 @@ const PropertyDetails = () => {
 
           <p className="property-details__description">{description}</p>
           
-          <button className="property-details__reserve-button">Peticion Reservar</button>
+          <button className="property-details__reserve-button" onClick={handleReservationNav}>Agendar una visita</button>
         </div>
       </div>
     </div>

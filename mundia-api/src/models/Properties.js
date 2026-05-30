@@ -60,7 +60,15 @@ export const Properties = sequelize.define("Properties", {
         ),
         defaultValue: "Sin Reservas",
         allowNull: false
-    }
+    },
+    id_agents: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    references: {
+      model: "Agents", 
+      key: "id_agents",
+    },
+  },
 },
 {
     timestamps: false,

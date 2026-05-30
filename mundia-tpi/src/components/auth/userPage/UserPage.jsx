@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useEffect } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { User, Mail, Phone, Edit2, LogOut } from "lucide-react";
 import "./UserPage.css";
+import { AuthenticationContext } from "../auth.context";
 
-const UserPage = ({ onLogOut }) => {
+const UserPage = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const { handleUserLogOut, token } = useContext(AuthenticationContext);
+
   useEffect(() => {
     const fetchUser = async () => {
-      const token = localStorage.getItem("token");
       if (!token) {
         setLoading(false);
-        console.log("no hay token");
+        console.log("No hay token");
         return;
       }
 
@@ -104,7 +106,7 @@ const UserPage = ({ onLogOut }) => {
                 <Button variant="outline-primary" className="mb-2 d-flex align-items-center justify-content-center gap-2">
                   <Edit2 size={16} /> Editar Perfil
                 </Button>
-                <Button variant="outline-danger" className="d-flex align-items-center justify-content-center gap-2" onClick={onLogOut}>
+                <Button variant="outline-danger" className="d-flex align-items-center justify-content-center gap-2" onClick={handleUserLogOut}>
                   <LogOut size={16} /> Cerrar Sesión
                 </Button>
               </Col>

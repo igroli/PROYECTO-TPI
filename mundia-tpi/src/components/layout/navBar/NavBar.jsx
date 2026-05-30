@@ -1,14 +1,16 @@
 import { Container, Nav, Navbar, Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import logo from "../../../assets/logo/logo_mundia.png";
 import loginIcon from "../../../assets/img/Login_pic.ico";
 import "../../../index.css";
 import "./Navbar.css";
+import { AuthenticationContext } from "../../auth/auth.context";
 
-const NavBar = ({ loggedIn, onLogOut }) => {
+const NavBar = () => {
   const [showDrawer, setShowDrawer] = useState(false);
 
+  const { token, handleUserLogOut } = useContext(AuthenticationContext);
   const toggleDrawer = () => setShowDrawer(!showDrawer);
   const navigate = useNavigate();
 
@@ -50,10 +52,10 @@ const NavBar = ({ loggedIn, onLogOut }) => {
               className={`drawer-overlay ${showDrawer ? "active" : ""}`}
               onClick={toggleDrawer}
             />
-
+            {/* acaaaaaaaaaaa*/}
             <div className={`user-drawer ${showDrawer ? "open" : ""}`}>
               <div className="drawer-header">
-                <h3>{loggedIn ? "Mi Cuenta" : "Bienvenido"}</h3>
+                <h3>{token ? "Mi Cuenta" : "Bienvenido"}</h3>
                 <Button 
                   variant="link" 
                   className="close-btn" 
@@ -65,7 +67,7 @@ const NavBar = ({ loggedIn, onLogOut }) => {
               </div>
 
               <div className="drawer-content">
-                {loggedIn ? (
+                {token ? (
                   <div className="menu-list">
                     <Button 
                       variant="link" 
@@ -91,8 +93,8 @@ const NavBar = ({ loggedIn, onLogOut }) => {
                     <hr />
                     <Button 
                       className="logout-btn w-100" 
-                      onClick={onLogOut}
-                    >
+                      onClick={handleUserLogOut}
+                    > 
                       Cerrar Sesión
                     </Button>
                   </div>
