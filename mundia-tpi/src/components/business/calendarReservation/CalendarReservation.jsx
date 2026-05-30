@@ -5,14 +5,13 @@ import { es } from "date-fns/locale";
 import { Button } from "react-bootstrap";
 import "react-day-picker/style.css";
 import { useLocation, useParams } from "react-router";
+import { getUserFromToken } from "../../auth/getUserFromToken";
 
 const CalendarReservation = () => {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
 
   const location = useLocation();
-
-  const id_properties = location.state?.id;
 
   const horariosDisponibles = [
     "09:00",
@@ -33,19 +32,64 @@ const CalendarReservation = () => {
 
   const handleSelectDay = (date) => {
     setSelectedDate(date || undefined);
-    setSelectedTime('');
+    setSelectedTime("");
   };
 
-  const handleReservation = () => {
+  const handleReservation = async (e) => {
+    e.preventDefault();
+
     const fechaFormateada = format(selectedDate, "yyyy-MM-dd");
     const fechaHoraConcat = `${fechaFormateada}T${selectedTime}`;
+    //valido date
+    if (!fechaHoraConcat) {
+      alert("Por favor, seleccione una fecha para la reserva.");
+      return;
+    }
 
-    const datosReserva = {
-      id_properties: id_properties,
-      reservation_date: fechaHoraConcat
-    };
+    // obtengo los ids del navigate
+    const id_properties = location.state?.id;
+    const id_agents = location.state?.id_agents;
+    // obtengo el id del usuario
+    const token = localStorage.getItem("token");
+    const id_users = getUserFromToken(token);
+    // valido users
+    if (!id_users) {
+    alert(
+      "La sesión expiró o no has iniciado sesión. Por favor, vuelve a ingrear.",
+    );
+    return;
+  }
 
-    console.log("visita confirmada:", datosReserva);
+    try {
+      const response = await fetch('http://localhost:3000/createreservation', {
+        method: 'POST',
+        headers: {
+          "Content-Type": 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          reservation_date: fechaHoraConcat,
+          id_properties: id_properties,
+          id_users: id_users,
+          id_agents: id_agents,
+        })
+      });
+
+      const resultado = await response.json();
+
+      if (response.ok){
+        alert("Reserva creada con éxito!");
+        setSelectedDate("");
+        setSelectedTime("");
+      } else {
+        alert("Error al reservar.");
+      }
+    } catch (error) {
+      alert("Se ha producido un error");
+      console.log("El error fue:", error);
+    }
+
+    console.log("visita confirmada:", body);
   };
   return (
     <div
@@ -72,9 +116,7 @@ const CalendarReservation = () => {
       <div>
         {selectedDate ? (
           <>
-            <h3>
-              Seleccione un horario para el dia elegido:
-            </h3>
+            <h3>Seleccione un horario para el dia elegido:</h3>
             <div>
               {horariosDisponibles.map((hora) => (
                 <button

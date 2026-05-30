@@ -1,5 +1,7 @@
 import { Agents } from "../models/Agents.js";
 import bcrypt from "bcrypt";
+import { Users } from "../models/Users.js";
+import { Roles } from "../models/Roles.js";
 
 export const getAgents = async (req, res) => {
   try {
@@ -12,25 +14,33 @@ export const getAgents = async (req, res) => {
 
 export const createAgents = async (req, res) => {
   try {
-    const { name, last_name, email, password, phone_number, image_url } =
-      req.body;
+    const { name, last_name, email, password, phone_number, image_url } = req.body;
 
+    const rolAgente = await Roles.findOne({ where: { name: "Agent" } });
+    if (!rolAgente) {
+      return res.status(500).json({ error: "Rol Agent no existe en la base de datos." });
+    }
 
     const saltRounds = 10;
-    
     const salt = await bcrypt.genSalt(saltRounds);
-    
     const hashedPassword = await bcrypt.hash(password, salt);
-      
-    const newAgent = await Agents.create({
+
+    const newUser = await Users.create({
       name,
       last_name,
       email,
       password: hashedPassword,
       phone_number,
       image_url,
+      id_roles: rolAgente.id_roles,
     });
-    res.json(newAgent);
+
+    await Agents.create({
+      activo: true,
+      id_users: newUser.id_users,
+    });
+
+    res.status(201).json({ message: "Agente registrado con éxito!" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

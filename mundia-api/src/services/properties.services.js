@@ -4,8 +4,15 @@ import { sequelize } from "../../db.js";
 // obtener todas las propiedades
 export const getProperties = async(req, res) => {
     const properties = await Properties.findAll();
+    include: [{
+    model: Agents,
+    include: [{ 
+      model: Users, 
+      attributes: ['name', 'last_name', 'image_url', 'phone_number']
+    }]
+  }]
     res.json(properties);
-}
+};
 
 // obtener las propiedades y el usuario puede poner un filtro de si es alquiler o venta
 export const getPropertiesFiltered = async (req, res) => {

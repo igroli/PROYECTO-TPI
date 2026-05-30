@@ -28,6 +28,14 @@ export const Users = sequelize.define("Users", {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
+    },
+    image_url: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    id_roles: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
     }
 },
 {

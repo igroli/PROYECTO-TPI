@@ -12,17 +12,17 @@ const PropertyDetails = () => {
 
   const { token } = useContext(AuthenticationContext);
   const volver = () => {
-    navigate('/properties')
+    navigate("/properties");
   };
 
   const handleReservationNav = () => {
-    if(!token) {
+    if (!token) {
       alert("Debe iniciar sesión para agendar una visita.");
-      navigate('/login');
+      navigate("/login");
     } else {
-      navigate('/reserve', { state: { id }});
+      navigate("/reserve", { state: { id: id, id_agents: id_agents } });
     }
-  }
+  };
 
   useEffect(() => {
     const fetchProperty = async () => {
@@ -48,9 +48,17 @@ const PropertyDetails = () => {
     fetchProperty();
   }, [id]);
 
-  if (error) return <div className="property-details__error">Hubo un problema: {error}</div>;
+  if (error)
+    return (
+      <div className="property-details__error">Hubo un problema: {error}</div>
+    );
 
-  if (!property) return <div className="property-details__loading">Cargando los detalles de la casa...</div>;
+  if (!property)
+    return (
+      <div className="property-details__loading">
+        Cargando los detalles de la casa...
+      </div>
+    );
 
   const {
     title,
@@ -65,12 +73,15 @@ const PropertyDetails = () => {
     image_url,
     pet_friendly,
     state_property,
+    id_agents,
   } = property;
 
   return (
     <div className="property-details">
       <div className="property-details__header-top">
-        <button className="property-details__back-button" onClick={volver}>← Volver</button>
+        <button className="property-details__back-button" onClick={volver}>
+          ← Volver
+        </button>
       </div>
 
       <div className="property-details__gallery-section">
@@ -94,7 +105,9 @@ const PropertyDetails = () => {
 
           <div className="property-details__price-card">
             <p className="property-details__price-label">Precio</p>
-            <p className="property-details__price">USD {price.toLocaleString()}</p>
+            <p className="property-details__price">
+              USD {price.toLocaleString()}
+            </p>
             <div className="property-details__transaction-badge">
               {type_transactions === "Venta" ? "Venta" : "Alquiler"}
             </div>
@@ -103,13 +116,17 @@ const PropertyDetails = () => {
           <div className="property-details__specs-grid">
             <div className="property-details__spec-item">
               <div className="property-details__spec-content">
-                <p className="property-details__spec-label">{square_mts} m² totales</p>
+                <p className="property-details__spec-label">
+                  {square_mts} m² totales
+                </p>
               </div>
             </div>
 
             <div className="property-details__spec-item">
               <div className="property-details__spec-content">
-                <p className="property-details__spec-label">{rooms} habitaciones</p>
+                <p className="property-details__spec-label">
+                  {rooms} habitaciones
+                </p>
               </div>
             </div>
 
@@ -121,14 +138,23 @@ const PropertyDetails = () => {
 
             <div className="property-details__spec-item">
               <div className="property-details__spec-content">
-                <p className="property-details__spec-label">{pet_friendly ? "Mascotas permitidas" : "No se permiten mascotas"}</p>
+                <p className="property-details__spec-label">
+                  {pet_friendly
+                    ? "Mascotas permitidas"
+                    : "No se permiten mascotas"}
+                </p>
               </div>
             </div>
           </div>
 
           <p className="property-details__description">{description}</p>
-          
-          <button className="property-details__reserve-button" onClick={handleReservationNav}>Agendar una visita</button>
+
+          <button
+            className="property-details__reserve-button"
+            onClick={handleReservationNav}
+          >
+            Agendar una visita
+          </button>
         </div>
       </div>
     </div>

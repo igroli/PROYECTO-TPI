@@ -1,5 +1,3 @@
-//relacion propiedad reservas
-
 import { Users } from "./Users.js";
 import { Properties } from "./Properties.js";
 import { Agents } from "./Agents.js";
@@ -7,6 +5,7 @@ import { Reservations } from "./Reservations.js";
 import { Favorites } from "./Favorites.js";
 import { Roles } from "./Roles.js";
 
+// relacion agentes propiedades
 Agents.hasMany(Properties, {
     foreignKey: 'id_agents'
 });
@@ -63,7 +62,6 @@ Properties.belongsToMany(
     });
 
 //relacion roles usuarios
-
 Roles.hasMany(Users, { 
     foreignKey: 'id_roles',
 });
@@ -71,3 +69,7 @@ Roles.hasMany(Users, {
 Users.belongsTo(Roles, { 
     foreignKey: 'id_roles',
 });
+
+// relacion users agents
+Users.hasOne(Agents, { foreignKey: 'id_users', onDelete: 'CASCADE' });
+Agents.belongsTo(Users, { foreignKey: 'id_users' });

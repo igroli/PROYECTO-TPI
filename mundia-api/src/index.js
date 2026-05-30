@@ -2,6 +2,7 @@ import express from "express";
 import housesRoutes from "./routes/houses.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import agentsRoutes from "./routes/agents.routes.js";
+import reservationRoutes from "./routes/reservations.routes.js";
 import { PORT } from "./config.js";
 import { sequelize } from "../db.js";
 import "./models/associations.js";
@@ -21,10 +22,11 @@ async function createDB() {
     app.use(housesRoutes);
     app.use(authRoutes);
     app.use(agentsRoutes);
+    app.use(reservationRoutes);
     
     app.listen(PORT);
 
-    await sequelize.sync({ alter: true });
+    await sequelize.sync();
     console.log("Data base succesfully synchronized!");
 
     console.log(`Server listening on port ${PORT}`);
