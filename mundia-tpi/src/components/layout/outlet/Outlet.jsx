@@ -29,7 +29,9 @@ const Outlet = () => {
         <Button onClick={() => navigate("/addproperty")} className="outlet__add-property-btn">
           Agregar propiedad
         </Button>
-        {/* sacar boton despues y ponerlo en el admin panel */}
+        <Button onClick={() => navigate("/addagents")} className="outlet__add-property-btn">
+          Agregar agente
+        </Button>
       </section>
     </div>
   );

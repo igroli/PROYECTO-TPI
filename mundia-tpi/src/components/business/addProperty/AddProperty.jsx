@@ -19,6 +19,7 @@ const AddProperty = () => {
     image_url: "",
     pet_friendly: false,
     state_property: "Sin Reservas",
+    id_agents: "",
   });
 
   const handleChange = (event) => {
@@ -77,6 +78,7 @@ const AddProperty = () => {
           image_url: "",
           pet_friendly: false,
           state_property: "Sin Reservas",
+          id_agents: "1",
         });
         successToast("Propiedad añadida!");
       })
@@ -121,6 +123,16 @@ const AddProperty = () => {
                 placeholder="Ingrese cantidad de habitaciones"
                 onChange={handleChange}
                 value={formData.rooms}
+              />
+            </Form.Group>
+            <Form.Group as={Col} controlId="formGridCity">
+              <Form.Label>Agente encargado</Form.Label>
+              <Form.Control
+                name="id_agents"
+                type="number"
+                placeholder="Ingrese id del agente"
+                onChange={handleChange}
+                value={formData.id_agents}
               />
             </Form.Group>
             <Form.Group as={Col} controlId="formGridCity">

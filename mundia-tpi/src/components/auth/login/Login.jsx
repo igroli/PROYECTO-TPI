@@ -1,10 +1,12 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import "./Login.css";
 import { errorToast } from "../../ui/notifications/notifications";
+import { AuthenticationContext } from "../auth.context";
+import { loginUser } from "./login.services";
 
- const Login = ({ onLogIn }) => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(false);
@@ -13,6 +15,7 @@ import { errorToast } from "../../ui/notifications/notifications";
     password: false,
   });
 
+  const { handleUserLogIn } = useContext(AuthenticationContext);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
@@ -28,7 +31,7 @@ import { errorToast } from "../../ui/notifications/notifications";
     setErrors({ ...errors, password: false });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!emailRef.current.value.length) {
@@ -46,27 +49,15 @@ import { errorToast } from "../../ui/notifications/notifications";
     }
     setErrors({ email: false, password: false });
     setMessage(false);
-    onLogIn();
-    fetch("http://localhost:3000/login", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify({ email, password }),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          return res.json().then((err) => {
-            throw new Error(err.message || "Contraseña o email incorrectos.");
-          });
-        }
-        return res.json();
-      })
-      .then((data) => {
-        localStorage.setItem("token", data);
-        navigate("/");
-      })
-      .catch((err) => errorToast(err.message));
+
+    try {
+      const data = await loginUser(email, password);
+      handleUserLogIn(data);
+      console.log("Token creado!");
+      navigate('/');
+    } catch (err) {
+      console.log("Hubo un error:", err.message);
+    }
   };
 
   return (

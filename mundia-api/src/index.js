@@ -1,6 +1,7 @@
 import express from "express";
 import housesRoutes from "./routes/houses.routes.js";
 import authRoutes from "./routes/auth.routes.js";
+import agentsRoutes from "./routes/agents.routes.js";
 import { PORT } from "./config.js";
 import { sequelize } from "../db.js";
 import "./models/associations.js";
@@ -19,6 +20,7 @@ async function createDB() {
     
     app.use(housesRoutes);
     app.use(authRoutes);
+    app.use(agentsRoutes);
     
     app.listen(PORT);
 
