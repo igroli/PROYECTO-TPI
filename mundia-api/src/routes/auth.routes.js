@@ -12,7 +12,7 @@ router.post("/register", registerUser);
 router.post("/login", loginUser);
 
 //rutas que necesitan token
-router.get("/users", verifyToken, getUsers);
+router.get("/users", verifyToken, getUsers );
 
 router.get("/usersme", verifyToken, getUserLogged)
 export default router;

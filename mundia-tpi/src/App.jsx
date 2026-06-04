@@ -28,32 +28,32 @@ function App() {
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/properties" element={<Propiedades />} />
           <Route path="/properties/:id" element={<PropertyDetails />} />
-          <Route
-            path="/login"
-            element={<Login />}
-          />
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route
             path="/addproperty"
             element={
-              <Protected >
-                <AdminPanel />
+              <Protected>
+                {" "}
+                <AdminPanel />{" "}
               </Protected>
             }
           />
           <Route
             path="/addagents"
             element={
-              <Protected >
-                <AddAgents />
+              <Protected>
+                {" "}
+                <AddAgents />{" "}
               </Protected>
             }
           />
           <Route
             path="/myreservations"
             element={
-              <Protected >
-                <MyReservations />
+              <Protected>
+                {" "}
+                <MyReservations />{" "}
               </Protected>
             }
           />
@@ -61,7 +61,8 @@ function App() {
             path="/myprofile"
             element={
               <Protected>
-                <UserPage />
+                {" "}
+                <UserPage />{" "}
               </Protected>
             }
           />
@@ -69,7 +70,8 @@ function App() {
             path="/reserve"
             element={
               <Protected>
-                <CalendarReservation />
+                {" "}
+                <CalendarReservation />{" "}
               </Protected>
             }
           />

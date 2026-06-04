@@ -5,8 +5,18 @@ import { Roles } from "../models/Roles.js";
 
 export const getAgents = async (req, res) => {
   try {
-    const agents = await Agents.findAll();
+    const agents = await Users.findAll({
+      attributes: ['id_users', 'name', 'last_name', 'email', 'image_url', 'phone_number'],
+      include: [{
+        model: Roles,
+        attributes: ['name'],
+        where: { name: 'Agent' }
+      }]
+    });
+
     res.json(agents);
+
+
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

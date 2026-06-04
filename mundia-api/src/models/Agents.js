@@ -11,6 +11,10 @@ export const Agents = sequelize.define("Agents", {
         type: DataTypes.BOOLEAN,
         allowNull: true,
     },
+    id_users: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    }
 }, 
 {
     timestamps: false,

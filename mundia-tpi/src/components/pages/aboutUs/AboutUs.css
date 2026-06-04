@@ -23,3 +23,15 @@
   text-align: center;
   margin: 0;
 }
+
+.about {
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding: 2rem;
+  width: 100%;
+  min-height: 90vh;
+}
