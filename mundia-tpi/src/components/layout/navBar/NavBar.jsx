@@ -35,7 +35,7 @@ const NavBar = () => {
               Propiedades
             </Nav.Link>
             <Nav.Link onClick={() => navigate("/aboutus")}>Nosotros</Nav.Link>
-            <Nav.Link>Tasaciones</Nav.Link>
+            <Nav.Link onClick={() => navigate("/valuations")}>Tasaciones</Nav.Link>
             <Nav.Link onClick={() => navigate("/contact")}>Contacto</Nav.Link>
             <div className="nav-link login-trigger" onClick={toggleDrawer}>
               <img

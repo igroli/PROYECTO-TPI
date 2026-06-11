@@ -16,6 +16,7 @@ import Protected from "./components/auth/protected/Protected";
 import PropertyDetails from "./components/business/propertyDetails/PropertyDetails";
 import CalendarReservation from "./components/business/calendarReservation/CalendarReservation";
 import AddAgents from "./components/business/addAgents/AddAgents";
+import Valuations from "./components/pages/tasaciones/valuations";
 
 function App() {
   return (
@@ -75,6 +76,7 @@ function App() {
               </Protected>
             }
           />
+          <Route path="/valuations" element={<Valuations />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
         <Footer />
