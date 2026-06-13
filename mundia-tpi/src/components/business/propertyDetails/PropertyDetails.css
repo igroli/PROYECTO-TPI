@@ -8,8 +8,10 @@
   background-color: white;
   border-bottom: 1px solid #e0e0e0;
   position: sticky;
-  top: 0;
-  z-index: 100;
+  top: 80px;
+  z-index: 10;
+
+  width: calc(100% - 380px);
 }
 
 .property-details__back-button {

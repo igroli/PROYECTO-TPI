@@ -90,6 +90,7 @@
   opacity: 0;
   pointer-events: none;
   transition: all 0.35s ease;
+  z-index: 1040;
 }
 
 .drawer-overlay.active {
