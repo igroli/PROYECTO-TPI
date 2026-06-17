@@ -3,12 +3,13 @@ import "./ContactForm.css";
 import "../../../index.css";
 
 const ContactForm = () => {
-  
+
   const handleSubmit = () => {
     alert("Un agente se contactara contigo pronto")
   }
   return (
     <>
+
       <div className="contact-form-container">
         <Form onSubmit={handleSubmit}>
           <Row className="mb-3">
@@ -45,6 +46,7 @@ const ContactForm = () => {
           </Button>
         </Form>
       </div>
+
     </>
   );
 };
