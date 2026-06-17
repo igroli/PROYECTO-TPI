@@ -145,7 +145,6 @@
    BOTON CERRAR
  */
 
-/* Se añade .user-drawer para ganar especificidad sobre librerías externas */
 .user-drawer .close-btn {
   background: transparent;
   border: none;
