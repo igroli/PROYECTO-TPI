@@ -1,119 +1,262 @@
-import React, { useContext, useState } from "react";
-import { useEffect } from "react";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import React, { useContext, useState, useEffect } from "react";
+import { Container, Row, Col, Card, Modal, Form } from "react-bootstrap";
 import { User, Mail, Phone, Edit2, LogOut } from "lucide-react";
 import "./UserPage.css";
 import { AuthenticationContext } from "../auth.context";
 
 const UserPage = () => {
+
   const [userInfo, setUserInfo] = useState(null);
   const [loading, setLoading] = useState(true);
-
   const { handleUserLogOut, token } = useContext(AuthenticationContext);
+
+
+  const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState({ name: "", last_name: "", phone_number: "" });
+  const [isUpdating, setIsUpdating] = useState(false);
+
 
   useEffect(() => {
     const fetchUser = async () => {
       if (!token) {
         setLoading(false);
-        console.log("No hay token");
         return;
       }
 
       try {
         const response = await fetch("http://localhost:3000/usersme", {
-            method: "GET",
+          method: "GET",
           headers: {
             "Authorization": `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         });
+        
         if (response.ok) {
           const data = await response.json();
           setUserInfo(data);
-          console.log("Datos del usuario obtenidos!");
         } else {
-          console.log("Error al obtener datos del usuario.");
         }
       } catch (error) {
-        console.log(error);
       } finally {
         setLoading(false);
       }
     };
 
     fetchUser();
-  }, []);
+  }, [token]); 
 
-    if(loading) {
-        return (
-          <Container className="text-center py-5">
-            <p className="text-muted">Cargando información del usuario...</p>
-          </Container>
-        );
+
+  const handleOpenEdit = () => {
+    setFormData({
+      name: userInfo.name || "",
+      last_name: userInfo.last_name || "",
+      phone_number: userInfo.phone_number || "",
+    });
+    setShowModal(true);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+
+    if (name === "phone_number") {
+
+      const soloNumeros = value.replace(/\D/g, "");
+      
+      if (soloNumeros.length > 10) return; 
+      
+      setFormData({ ...formData, [name]: soloNumeros });
+      return;
     }
 
-    if(!userInfo) {
-        return (
-          <Container className="text-center py-5">
-            <p className="text-muted">No se pudo cargar la información del usuario.</p>
-          </Container>
-        );
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleSaveProfile = async (e) => {
+    e.preventDefault();
+
+    if (formData.phone_number && formData.phone_number.length !== 10) {
+      alert("El número de teléfono debe contener 10 dígitos.");
+      return;
     }
+
+    setIsUpdating(true);
+
+    try {
+      const response = await fetch("http://localhost:3000/users/profile", {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+
+        setUserInfo(data.user); 
+        setShowModal(false); 
+      } else {
+        alert("Ocurrió un error al intentar guardar los cambios en el servidor.");
+      }
+    } catch (error) {
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <Container className="text-center py-5">
+        <p className="text-muted">Cargando información de tu perfil...</p>
+      </Container>
+    );
+  }
+
+  if (!userInfo) {
+    return (
+      <Container className="text-center py-5">
+        <p className="text-muted">No se pudo recuperar la información de la cuenta.</p>
+      </Container>
+    );
+  }
 
   return (
-    <Container className="py-5" style={{ minHeight: "80vh" }}>
-      <Row className="mb-4">
-        <Col>
-          <h2 className="fw-bold border-bottom pb-2">Mi Perfil</h2>
-          <p className="text-muted">Información de mi cuenta en Mundia.</p>
-        </Col>
-      </Row>
+    <Container className="py-5 user-card-container">
+      <Row className="w-100">
+        <Col md={{ span: 10, offset: 1 }}>
+          <div className="mb-4">
+            <h2 className="user-section-title">Mi Perfil</h2>
+            <p className="user-section-subtitle">Información de mi cuenta en Mundia.</p>
+          </div>
 
-      <Row>
-        <Col xs={12}>
-          <Card className="shadow-sm border-0 overflow-hidden h-100">
+          <Card className="user-profile-card">
             <Row className="g-0">
-              <Col md={3} className="bg-light d-flex align-items-center justify-content-center p-4">
+              <Col md={4} className="avatar-container">
                 <div className="profile-avatar">
-                  <User size={80} className="text-primary" />
+                  {userInfo.image_url ? (
+                    <img 
+                      src={userInfo.image_url} 
+                      alt={`Avatar de ${userInfo.name}`} 
+                      className="user-avatar-img"
+                    />
+                  ) : (
+                    <User size={80} />
+                  )}
                 </div>
               </Col>
 
-              <Col md={6} className="p-4">
-                <Card.Title className="fw-bold mb-4">
+              <Col md={5} className="user-info-body">
+                <div className="user-name">
                   {userInfo.name} {userInfo.last_name}
-                </Card.Title>
+                </div>
 
-                <div className="d-flex flex-column gap-3">
-                  <div className="d-flex align-items-center text-secondary">
-                    <Mail size={18} className="me-3 text-primary" />
-                    <div>
-                      <small className="text-muted d-block">Correo Electrónico</small>
-                      <span>{userInfo.email}</span>
+                <div className="d-flex flex-column">
+                  <div className="user-info-item">
+                    <Mail size={18} className="user-info-icon" />
+                    <div className="user-info-content">
+                      <small className="user-info-label">Correo Electrónico</small>
+                      <div className="user-info-value">{userInfo.email}</div>
                     </div>
                   </div>
-                  <div className="d-flex align-items-center text-secondary">
-                    <Phone size={18} className="me-3 text-primary" />
-                    <div>
-                      <small className="text-muted d-block">Teléfono</small>
-                      <span>{userInfo.phone_number}</span>
+                  <div className="user-info-item">
+                    <Phone size={18} className="user-info-icon" />
+                    <div className="user-info-content">
+                      <small className="user-info-label">Teléfono</small>
+                      <div className="user-info-value">{userInfo.phone_number || "No registrado"}</div>
                     </div>
                   </div>
                 </div>
               </Col>
 
-              <Col md={3} className="d-flex flex-column justify-content-center p-4 border-start bg-light">
-                <Button variant="outline-primary" className="mb-2 d-flex align-items-center justify-content-center gap-2">
+              <Col md={3} className="user-actions-container">
+                <button 
+                  className="btn-user-action btn-user-action-edit"
+                  onClick={handleOpenEdit}
+                >
                   <Edit2 size={16} /> Editar Perfil
-                </Button>
-                <Button variant="outline-danger" className="d-flex align-items-center justify-content-center gap-2" onClick={handleUserLogOut}>
+                </button>
+                <button 
+                  className="btn-user-action btn-user-action-logout"
+                  onClick={handleUserLogOut}
+                >
                   <LogOut size={16} /> Cerrar Sesión
-                </Button>
+                </button>
               </Col>
             </Row>
           </Card>
         </Col>
       </Row>
+
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Editar Mi Información</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleSaveProfile}>
+            
+            <Form.Group className="mb-3">
+              <Form.Label>Nombre</Form.Label>
+              <Form.Control 
+                type="text" 
+                name="name" 
+                value={formData.name} 
+                onChange={handleChange} 
+                required 
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Apellido</Form.Label>
+              <Form.Control 
+                type="text" 
+                name="last_name" 
+                value={formData.last_name} 
+                onChange={handleChange} 
+                required 
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Teléfono</Form.Label>
+              <Form.Control 
+                type="tel" 
+                name="phone_number" 
+                value={formData.phone_number} 
+                onChange={handleChange} 
+                placeholder="Ej: 1234567890"
+                required
+              />
+              <Form.Text className="text-muted">
+              </Form.Text>
+            </Form.Group>
+
+            <div className="d-flex justify-content-end gap-2 mt-4">
+              <button 
+                type="button"
+                className="btn-modal-cancel" 
+                onClick={() => setShowModal(false)}
+              >
+                Cancelar
+              </button>
+              <button 
+                type="submit"
+                className="btn-modal-save" 
+                disabled={isUpdating}
+              >
+                {isUpdating ? "Guardando..." : "Guardar Cambios"}
+              </button>
+            </div>
+
+          </Form>
+        </Modal.Body>
+      </Modal>
+
     </Container>
   );
 };

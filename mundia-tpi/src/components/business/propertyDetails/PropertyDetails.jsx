@@ -72,11 +72,11 @@ const PropertyDetails = () => {
     address,
     image_url,
     pet_friendly,
-    state_property,
     id_agents,
   } = property;
 
   return (
+    
     <div className="property-details">
       <div className="property-details__header-top">
         <button className="property-details__back-button" onClick={volver}>
@@ -145,7 +145,18 @@ const PropertyDetails = () => {
                 </p>
               </div>
             </div>
+
+            <div className="property-details__spec-item">
+              <div className="property-details__spec-content">
+                <p className="property-details__spec-label">
+                  Direccion: {address}
+                </p>
+              </div>
+            </div>
+
           </div>
+
+          
 
           <p className="property-details__description">{description}</p>
 
