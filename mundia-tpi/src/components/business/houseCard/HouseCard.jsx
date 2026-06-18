@@ -6,6 +6,9 @@ import { useNavigate } from "react-router";
 const HouseCard = ({ house }) => {
 const navigate = useNavigate();
 
+const handleNavigation = () => {
+  navigate(`/properties/${house.id_properties}`, { state: { house: house }});
+}
   return (
     <div>
       <Card className="house-card">
@@ -14,12 +17,12 @@ const navigate = useNavigate();
           <Card.Body className="house-card__body">
             <Card.Title className="house-card__title">{house.title}</Card.Title>
             <Card.Text className="house-card__text">{house.description}</Card.Text>
-            <Button className="house-card__button" onClick={() => navigate(`/properties/${house.id_properties}`)} >Ver detalles</Button>
+            <Button className="house-card__button" onClick={handleNavigation} >Ver detalles</Button>
           </Card.Body>
         </div>
       </Card>
     </div>
-  );
+  )
 };
 
 export default HouseCard;

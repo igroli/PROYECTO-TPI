@@ -79,6 +79,7 @@ const CalendarReservation = () => {
 
       if (response.ok){
         alert("Reserva creada con éxito!");
+        console.log("visita confirmada:", resultado);
         setSelectedDate("");
         setSelectedTime("");
       } else {
@@ -88,8 +89,6 @@ const CalendarReservation = () => {
       alert("Se ha producido un error");
       console.log("El error fue:", error);
     }
-
-    console.log("visita confirmada:", body);
   };
   return (
     <div
