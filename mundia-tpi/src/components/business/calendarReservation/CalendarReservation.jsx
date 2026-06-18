@@ -54,31 +54,32 @@ const CalendarReservation = () => {
     const id_users = getUserFromToken(token);
     // valido users
     if (!id_users) {
-    alert(
-      "La sesión expiró o no has iniciado sesión. Por favor, vuelve a ingrear.",
-    );
-    return;
-  }
+      alert(
+        "La sesión expiró o no has iniciado sesión. Por favor, vuelve a ingrear.",
+      );
+      return;
+    }
 
     try {
-      const response = await fetch('http://localhost:3000/createreservation', {
-        method: 'POST',
+      const response = await fetch("http://localhost:3000/createreservation", {
+        method: "POST",
         headers: {
-          "Content-Type": 'application/json',
-          'Authorization': `Bearer ${token}`
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           reservation_date: fechaHoraConcat,
           id_properties: id_properties,
           id_users: id_users,
           id_agents: id_agents,
-        })
+        }),
       });
 
       const resultado = await response.json();
 
-      if (response.ok){
+      if (response.ok) {
         alert("Reserva creada con éxito!");
+        console.log("visita confirmada:", resultado);
         setSelectedDate("");
         setSelectedTime("");
       } else {
@@ -88,8 +89,6 @@ const CalendarReservation = () => {
       alert("Se ha producido un error");
       console.log("El error fue:", error);
     }
-
-    console.log("visita confirmada:", body);
   };
   return (
     <div

@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useContext, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router";
 import "./PropertyDetails.css";
 import CalendarReservation from "../calendarReservation/CalendarReservation";
 import { AuthenticationContext } from "../../auth/auth.context";
@@ -9,7 +9,9 @@ const PropertyDetails = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [property, setProperty] = useState(null);
+  const location = useLocation();
 
+  const { house } = location.state;
   const { token } = useContext(AuthenticationContext);
   const volver = () => {
     navigate("/properties");
@@ -20,60 +22,8 @@ const PropertyDetails = () => {
       alert("Debe iniciar sesión para agendar una visita.");
       navigate("/login");
     } else {
-      navigate("/reserve", { state: { id: id, id_agents: id_agents } });
-    }
+      navigate("/reserve", { state: { id: id, id_agents: house.id_agents } });    }
   };
-
-  useEffect(() => {
-    const fetchProperty = async () => {
-      try {
-        if (!id) {
-          console.log("no esta");
-          return;
-        }
-
-        const res = await fetch(`http://localhost:3000/house/${id}`);
-
-        if (!res.ok) {
-          throw new Error("error al obtener propiedad");
-          console.log("!res");
-        }
-        const prop = await res.json();
-        setProperty(prop);
-      } catch (err) {
-        setError(err.message);
-      }
-    };
-
-    fetchProperty();
-  }, [id]);
-
-  if (error)
-    return (
-      <div className="property-details__error">Hubo un problema: {error}</div>
-    );
-
-  if (!property)
-    return (
-      <div className="property-details__loading">
-        Cargando los detalles de la casa...
-      </div>
-    );
-
-  const {
-    title,
-    description,
-    type_property,
-    type_transactions,
-    price,
-    square_mts,
-    rooms,
-    bathroom,
-    address,
-    image_url,
-    pet_friendly,
-    id_agents,
-  } = property;
 
   return (
     
@@ -85,11 +35,11 @@ const PropertyDetails = () => {
       </div>
 
       <div className="property-details__gallery-section">
-        {image_url && (
+        {house.image_url && (
           <div className="property-details__gallery-main">
             <img
-              src={image_url}
-              alt={title}
+              src={house.image_url}
+              alt={house.title}
               className="property-details__main-image"
             />
           </div>
@@ -99,17 +49,17 @@ const PropertyDetails = () => {
       <div className="property-details__main-container">
         <div className="property-details__info-panel">
           <div className="property-details__title-section">
-            <h1 className="property-details__title">{title}</h1>
-            <p className="property-details__type-badge">{type_property}</p>
+            <h1 className="property-details__title">{house.title}</h1>
+            <p className="property-details__type-badge">{house.type_property}</p>
           </div>
 
           <div className="property-details__price-card">
             <p className="property-details__price-label">Precio</p>
             <p className="property-details__price">
-              USD {price.toLocaleString()}
+              USD {house.price.toLocaleString()}
             </p>
             <div className="property-details__transaction-badge">
-              {type_transactions === "Venta" ? "Venta" : "Alquiler"}
+              {house.type_transactions === "Venta" ? "Venta" : "Alquiler"}
             </div>
           </div>
 
@@ -117,7 +67,7 @@ const PropertyDetails = () => {
             <div className="property-details__spec-item">
               <div className="property-details__spec-content">
                 <p className="property-details__spec-label">
-                  {square_mts} m² totales
+                  {house.square_mts} m² totales
                 </p>
               </div>
             </div>
@@ -125,21 +75,21 @@ const PropertyDetails = () => {
             <div className="property-details__spec-item">
               <div className="property-details__spec-content">
                 <p className="property-details__spec-label">
-                  {rooms} habitaciones
+                  {house.rooms} habitaciones
                 </p>
               </div>
             </div>
 
             <div className="property-details__spec-item">
               <div className="property-details__spec-content">
-                <p className="property-details__spec-label">{bathroom} baños</p>
+                <p className="property-details__spec-label">{house.bathroom} baños</p>
               </div>
             </div>
 
             <div className="property-details__spec-item">
               <div className="property-details__spec-content">
                 <p className="property-details__spec-label">
-                  {pet_friendly
+                  {house.pet_friendly
                     ? "Mascotas permitidas"
                     : "No se permiten mascotas"}
                 </p>
@@ -149,7 +99,7 @@ const PropertyDetails = () => {
             <div className="property-details__spec-item">
               <div className="property-details__spec-content">
                 <p className="property-details__spec-label">
-                  Direccion: {address}
+                  Direccion: {house.address}
                 </p>
               </div>
             </div>
@@ -158,7 +108,7 @@ const PropertyDetails = () => {
 
           
 
-          <p className="property-details__description">{description}</p>
+          <p className="property-details__description">{house.description}</p>
 
           <button
             className="property-details__reserve-button"
