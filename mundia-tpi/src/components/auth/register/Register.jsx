@@ -135,6 +135,9 @@ const Register = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </Form.Group>
+
+          <Button type="submit">Registrarse</Button>
+
           <Form.Group>
             <Button
               className="button-alternate"
@@ -143,7 +146,6 @@ const Register = () => {
               ¿Tenés cuenta? Iniciá sesión
             </Button>
           </Form.Group>
-          <Button type="submit">Registrarse</Button>
         </Form>
       </div>
     </>

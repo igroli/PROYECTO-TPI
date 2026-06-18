@@ -88,13 +88,19 @@ const Login = () => {
               className={errors.password && "border border-danger border-3"}
             />
           </Form.Group>
+
+          {/* Primero el botón de acción principal para enviar el formulario */}
+          <Button type="submit">Iniciar Sesion</Button>
+
+          {/* Después el botón secundario para redirigir al registro */}
           <Form.Group>
             <Button onClick={() => navigate("/register")}>
               No tiene cuenta? Registrese
             </Button>
           </Form.Group>
-          <Button type="submit">Iniciar Sesion</Button>
         </Form>
+
+        {/* El mensaje de error/validación queda al final */}
         {message && <p>Debe completar los campos para iniciar sesión.</p>}
       </div>
     </div>
