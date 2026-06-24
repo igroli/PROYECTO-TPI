@@ -8,14 +8,14 @@
 .user-section-title {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--text);
   border-bottom: 3px solid var(--secondary);
   padding-bottom: 1rem;
   margin-bottom: 0.5rem;
 }
 
 .user-section-subtitle {
-  color: #999;
+  color: var(--text-secondary);
   font-size: 1rem;
   margin-bottom: 0;
 }
@@ -25,8 +25,10 @@
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   overflow: hidden;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-  background: #fff;
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+  background: var(--surface);
   min-height: 200px;
 }
 
@@ -60,7 +62,7 @@
 }
 
 .avatar-container {
-  background: linear-gradient(135deg, #f5f7fa, #e8edf2);
+  background: linear-gradient(135deg, var(--surface), var(--bg));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,8 +72,8 @@
 
 .user-info-body {
   padding: 2rem;
-  background: #fff;
-  border-left: 2px solid #e0e0e0;
+  background: var(--surface);
+  border-left: 2px solid var(--border);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -81,7 +83,7 @@
 .user-name {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--text);
   margin-bottom: 1.5rem;
   letter-spacing: 0.3px;
 }
@@ -122,9 +124,9 @@
 }
 
 .user-actions-container {
-  background: #f5f7fa;
+  background: var(--surface);
   padding: 2rem;
-  border-left: 2px solid #e0e0e0;
+  border-left: 2px solid var(--border);
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -205,7 +207,7 @@
 
 .form-label {
   font-weight: 600;
-  color: var(--primary);
+  color: var(--text-secondary);
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   font-size: 0.9rem;
@@ -213,12 +215,15 @@
 }
 
 .form-control {
-  border: 2px solid #e0e0e0;
+  border: 2px solid var(--border);
   border-radius: 6px;
   padding: 0.75rem;
   font-size: 1rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  color: var(--primary);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  color: var(--text);
+  background: var(--surface);
 }
 
 .form-control:focus {
@@ -233,8 +238,8 @@
 }
 
 .btn-modal-cancel {
-  background: #e8edf2;
-  color: var(--primary);
+  background: var(--primary);
+  color: #fff;
   border: none;
   font-weight: 600;
   padding: 0.75rem 1.5rem;
@@ -244,7 +249,7 @@
 }
 
 .btn-modal-cancel:hover {
-  background: #d0d8e0;
+  filter: brightness(0.92);
 }
 
 .btn-modal-save {

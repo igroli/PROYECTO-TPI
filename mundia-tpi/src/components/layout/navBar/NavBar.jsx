@@ -1,11 +1,12 @@
 import { Container, Nav, Navbar, Button } from "react-bootstrap";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import logo from "../../../assets/logo/logo_mundia.png";
 import loginIcon from "../../../assets/img/Login_pic.ico";
 import "../../../index.css";
 import "./Navbar.css";
 import { AuthenticationContext } from "../../auth/auth.context";
+import ToggleTheme from "../../ui/theme/ToggleTheme";
 
 const NavBar = () => {
   const [showDrawer, setShowDrawer] = useState(false);
@@ -37,6 +38,7 @@ const NavBar = () => {
             <Nav.Link onClick={() => navigate("/aboutus")}>Nosotros</Nav.Link>
             <Nav.Link onClick={() => navigate("/valuations")}>Tasaciones</Nav.Link>
             <Nav.Link onClick={() => navigate("/contact")}>Contacto</Nav.Link>
+            <ToggleTheme />
             <div className="nav-link login-trigger" onClick={toggleDrawer}>
               <img
                 src={loginIcon}
@@ -56,9 +58,9 @@ const NavBar = () => {
             <div className={`user-drawer ${showDrawer ? "open" : ""}`}>
               <div className="drawer-header">
                 <h3>{token ? "Mi Cuenta" : "Bienvenido"}</h3>
-                <Button 
-                  variant="link" 
-                  className="close-btn" 
+                <Button
+                  variant="link"
+                  className="close-btn"
                   onClick={toggleDrawer}
                   aria-label="Cerrar menú"
                 >
@@ -69,32 +71,32 @@ const NavBar = () => {
               <div className="drawer-content">
                 {token ? (
                   <div className="menu-list">
-                    <Button 
-                      variant="link" 
+                    <Button
+                      variant="link"
                       className="w-100 text-start"
                       onClick={() => handleNavigation("/myprofile")}
                     >
                       Mi Perfil
                     </Button>
-                    <Button 
-                      variant="link" 
+                    <Button
+                      variant="link"
                       className="w-100 text-start"
                       onClick={() => handleNavigation("/myreservations")}
                     >
                       Mis Reservas
                     </Button>
-                    <Button 
-                      variant="link" 
+                    <Button
+                      variant="link"
                       className="w-100 text-start"
                       onClick={() => handleNavigation("/favorites")}
                     >
                       Favoritos
                     </Button>
                     <hr />
-                    <Button 
-                      className="logout-btn w-100" 
+                    <Button
+                      className="logout-btn w-100"
                       onClick={handleUserLogOut}
-                    > 
+                    >
                       Cerrar Sesión
                     </Button>
                   </div>
@@ -109,8 +111,8 @@ const NavBar = () => {
                     </Button>
                     <p className="register-text">
                       ¿No tienes cuenta?{" "}
-                      <Button 
-                        variant="link" 
+                      <Button
+                        variant="link"
                         className="p-0"
                         onClick={() => handleNavigation("/register")}
                       >

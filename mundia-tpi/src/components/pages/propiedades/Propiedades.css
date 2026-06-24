@@ -1,5 +1,5 @@
 .propiedades-container {
-  background-color: #eee;
+  background-color: var(--bg);
   min-height: 100vh;
   display: flex;
   flex-direction: column;

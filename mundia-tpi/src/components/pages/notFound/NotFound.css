@@ -1,5 +1,5 @@
 .not-found-container {
-  background-color: #eee;
+  background-color: var(--bg);
   padding: 2rem;
   display: flex;
   flex-direction: column;

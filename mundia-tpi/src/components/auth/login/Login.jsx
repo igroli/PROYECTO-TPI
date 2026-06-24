@@ -1,6 +1,6 @@
 import { useContext, useRef, useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import { errorToast } from "../../ui/notifications/notifications";
 import { AuthenticationContext } from "../auth.context";

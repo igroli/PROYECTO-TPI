@@ -1,16 +1,23 @@
-import { BrowserRouter, Routes, Route } from "react-router";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// Layout
 import NavBar from "./components/layout/navBar/NavBar";
 import Footer from "./components/layout/footer/Footer";
+import LayoutOutlet from "./components/layout/outlet/Outlet";
+
+// Auth protection
 import Protected from "./components/auth/protected/Protected";
 
 // Pages
-import Outlet from "./components/layout/outlet/Outlet";
 import NotFound from "./components/pages/notFound/NotFound";
 import AboutUs from "./components/pages/aboutUs/AboutUs";
 import Propiedades from "./components/pages/propiedades/Propiedades";
 import Valuations from "./components/pages/tasaciones/valuations";
+import AdminPanel from "./components/pages/adminPanel/AdminPanel";
+import MyReservations from "./components/pages/myReservations/MyReservations";
+import Home from "./components/pages/home/Home";
 
-// Auth
+// Auth pages
 import Login from "./components/auth/login/Login";
 import Register from "./components/auth/register/Register";
 import UserPage from "./components/auth/userPage/UserPage";
@@ -22,33 +29,82 @@ import ContactForm from "./components/ui/contactForm/ContactForm";
 import PropertyDetails from "./components/business/propertyDetails/PropertyDetails";
 import CalendarReservation from "./components/business/calendarReservation/CalendarReservation";
 import AddAgents from "./components/business/addAgents/AddAgents";
-import AdminPanel from "./components/pages/adminPanel/AdminPanel";
-import MyReservations from "./components/pages/myReservations/MyReservations";
 
 function App() {
   return (
     <BrowserRouter>
-      <NavBar />
       <Routes>
+        {/* ===== LAYOUT BASE (NavBar + Footer) ===== */}
+        <Route
+          path="/"
+          element={
+            <>
+              <NavBar />
+              <LayoutOutlet />
+              <Footer />
+            </>
+          }
+        >
+          {/* ===== RUTAS PÚBLICAS ===== */}
+          <Route index element={<Home />} />
+          <Route path="contact" element={<ContactForm />} />
+          <Route path="aboutus" element={<AboutUs />} />
+          <Route path="properties" element={<Propiedades />} />
+          <Route path="properties/:id" element={<PropertyDetails />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="valuations" element={<Valuations />} />
 
-        <Route path="/" element={<Outlet />} />
-        <Route path="/contact" element={<ContactForm />} />
-        <Route path="/aboutus" element={<AboutUs />} />
-        <Route path="/properties" element={<Propiedades />} />
-        <Route path="/properties/:id" element={<PropertyDetails />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/valuations" element={<Valuations />} />
+          {/* ===== RUTAS PROTEGIDAS ===== */}
+          <Route
+            path="addproperty"
+            element={
+              <Protected>
+                <AdminPanel />
+              </Protected>
+            }
+          />
 
-        <Route path="/addproperty" element={<Protected><AdminPanel /></Protected>} />
-        <Route path="/addagents" element={<Protected><AddAgents /></Protected>} />
-        <Route path="/myreservations" element={<Protected><MyReservations /></Protected>} />
-        <Route path="/myprofile" element={<Protected><UserPage /></Protected>} />
-        <Route path="/reserve" element={<Protected><CalendarReservation /></Protected>} />
+          <Route
+            path="addagents"
+            element={
+              <Protected>
+                <AddAgents />
+              </Protected>
+            }
+          />
 
-        <Route path="/*" element={<NotFound />} />
+          <Route
+            path="myreservations"
+            element={
+              <Protected>
+                <MyReservations />
+              </Protected>
+            }
+          />
+
+          <Route
+            path="myprofile"
+            element={
+              <Protected>
+                <UserPage />
+              </Protected>
+            }
+          />
+
+          <Route
+            path="reserve"
+            element={
+              <Protected>
+                <CalendarReservation />
+              </Protected>
+            }
+          />
+
+          {/* ===== NOT FOUND DENTRO DEL LAYOUT ===== */}
+          <Route path="*" element={<NotFound />} />
+        </Route>
       </Routes>
-      <Footer />
     </BrowserRouter>
   );
 }

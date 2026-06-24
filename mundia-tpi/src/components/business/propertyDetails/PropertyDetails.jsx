@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./PropertyDetails.css";
 import CalendarReservation from "../calendarReservation/CalendarReservation";
 import { AuthenticationContext } from "../../auth/auth.context";
@@ -22,11 +22,12 @@ const PropertyDetails = () => {
       alert("Debe iniciar sesión para agendar una visita.");
       navigate("/login");
     } else {
-      navigate("/reserve", { state: { id: id, id_agents: house.id_agents } });    }
+      navigate("/reserve", { state: { id: id, id_agents: house.id_agents } });
+    }
   };
 
   return (
-    
+
     <div className="property-details">
       <div className="property-details__header-top">
         <button className="property-details__back-button" onClick={volver}>
@@ -106,7 +107,7 @@ const PropertyDetails = () => {
 
           </div>
 
-          
+
 
           <p className="property-details__description">{house.description}</p>
 

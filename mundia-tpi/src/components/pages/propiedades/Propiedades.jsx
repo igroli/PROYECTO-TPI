@@ -1,7 +1,7 @@
 import "./Propiedades.css";
 import HouseCard from "../../business/houseCard/HouseCard";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router";
+import { useSearchParams } from "react-router-dom";
 
 const Propiedades = () => {
   const [searchParams] = useSearchParams();
@@ -9,11 +9,11 @@ const Propiedades = () => {
   const [houses, setHouses] = useState([]);
 
   useEffect(() => {
-    
-  const url = tipoVenta
-  ? `http://localhost:3000/propiedades?type_transactions=${tipoVenta}`
-  : `http://localhost:3000/propiedades`;
- 
+
+    const url = tipoVenta
+      ? `http://localhost:3000/propiedades?type_transactions=${tipoVenta}`
+      : `http://localhost:3000/propiedades`;
+
     fetch(url)
       .then((res) => res.json())
       .then((data) => {

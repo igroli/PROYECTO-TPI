@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Card } from "react-bootstrap";
 import "./HouseCard.css";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const HouseCard = ({ house }) => {
   const navigate = useNavigate();

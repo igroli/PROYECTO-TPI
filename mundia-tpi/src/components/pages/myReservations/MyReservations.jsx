@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Calendar, Clock, MapPin, Home, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Card, Button, Badge } from "react-bootstrap";
 import { AuthenticationContext } from "../../auth/auth.context";
 

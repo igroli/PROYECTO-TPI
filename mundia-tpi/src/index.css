@@ -1,21 +1,91 @@
 :root {
- 
-  --primary: #2C3947;     
-  --secondary: #C2A56D;    
-  --accent: #2C3947;   
-  
-  
-  --bg-primary: #E8EDF2;
-  --bg-secondary: #2C3947;
-  --bg-card: #547A95;   
-  
+  --primary: #2c3947;
+  --secondary: #c2a56d;
+  --accent: #2c3947;
 
-  --text-primary: #fff;
+  --bg: #e8edf2;
+  --bg-primary: #e8edf2;
+  --bg-secondary: #2c3947;
+  --bg-card: #547a95;
+  --surface: #ffffff;
+  --surface-muted: #f5f7fa;
+  --border: rgba(0, 0, 0, 0.12);
+
+  --text: #1f2937;
   --text-secondary: #000000;
-  --text-light: #ffffff;  
-  
+  --text-primary: #ffffff;
+  --text-light: #ffffff;
+  --text-muted: #4b5563;
 
   --success: #64ffda;
   --error: #ff6b6b;
   --warning: #ffd93d;
+}
+
+html[data-bs-theme="dark"] {
+  --bg: #0f172a;
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-card: #1f2937;
+  --surface: #111827;
+  --surface-muted: #1f2937;
+  --border: rgba(255, 255, 255, 0.16);
+
+  --text: #f8fafc;
+  --text-secondary: #e5e7eb;
+  --text-primary: #ffffff;
+  --text-light: #ffffff;
+  --text-muted: #cbd5e1;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+button.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.85rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+button.theme-toggle-btn:hover {
+  background-color: var(--surface-muted);
+}
+
+/* Override Bootstrap's bg-light for specific reservation action panels in dark mode */
+html[data-bs-theme="dark"]
+  .d-flex.flex-column.justify-content-center.p-4.border-start.bg-light {
+  background-color: var(--surface) !important;
+  border-left-color: var(--border) !important;
+  color: var(--text) !important;
+}
+
+/* General safeguard: make .bg-light adapt in dark mode where appropriate */
+html[data-bs-theme="dark"] .bg-light {
+  background-color: var(--surface) !important;
+  color: var(--text) !important;
 }
