@@ -10,10 +10,11 @@ const UserPage = () => {
   const [loading, setLoading] = useState(true);
   const { handleUserLogOut, token } = useContext(AuthenticationContext);
 
-
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({ name: "", last_name: "", phone_number: "" });
   const [isUpdating, setIsUpdating] = useState(false);
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
 
   useEffect(() => {
@@ -35,7 +36,6 @@ const UserPage = () => {
         if (response.ok) {
           const data = await response.json();
           setUserInfo(data);
-        } else {
         }
       } catch (error) {
       } finally {
@@ -59,21 +59,14 @@ const UserPage = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-
     if (name === "phone_number") {
-
       const soloNumeros = value.replace(/\D/g, "");
-      
-      if (soloNumeros.length > 10) return; 
-      
+      if (soloNumeros.length > 10) return;
       setFormData({ ...formData, [name]: soloNumeros });
       return;
     }
 
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSaveProfile = async (e) => {
@@ -98,9 +91,8 @@ const UserPage = () => {
 
       if (response.ok) {
         const data = await response.json();
-
-        setUserInfo(data.user); 
-        setShowModal(false); 
+        setUserInfo(data.user);
+        setShowModal(false);
       } else {
         alert("Ocurrió un error al intentar guardar los cambios en el servidor.");
       }
@@ -109,6 +101,27 @@ const UserPage = () => {
       setIsUpdating(false);
     }
   };
+
+  const handleDeleteAccount = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/users/delete", {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        handleUserLogOut();
+      } else {
+        alert("Ocurrió un error al intentar eliminar la cuenta.");
+      }
+    } catch (error) {
+      alert("Error de conexión.");
+    }
+  };
+
 
   if (loading) {
     return (
@@ -187,12 +200,20 @@ const UserPage = () => {
                 >
                   <LogOut size={16} /> Cerrar Sesión
                 </button>
+
+                <span 
+                  className="delete-account-link"
+                  onClick={() => setShowDeleteModal(true)}
+                >
+                  ¿Querés eliminar tu cuenta?
+                </span>
               </Col>
             </Row>
           </Card>
         </Col>
       </Row>
 
+      {/* Modal de edición de perfil */}
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
         <Modal.Header closeButton>
           <Modal.Title>Editar Mi Información</Modal.Title>
@@ -254,6 +275,33 @@ const UserPage = () => {
             </div>
 
           </Form>
+        </Modal.Body>
+      </Modal>
+
+      {/* Modal de confirmación de eliminación */}
+      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Eliminar cuenta</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p className="text-muted">
+            Si eliminás tu cuenta, se borrará toda tu información y las reservas que hayas hecho.
+            Esta acción no se puede deshacer.
+          </p>
+          <div className="d-flex justify-content-end gap-2 mt-4">
+            <button 
+              className="btn-modal-cancel"
+              onClick={() => setShowDeleteModal(false)}
+            >
+              Cancelar
+            </button>
+            <button 
+              className="btn btn-danger"
+              onClick={handleDeleteAccount}
+            >
+              Sí, eliminar cuenta
+            </button>
+          </div>
         </Modal.Body>
       </Modal>
 

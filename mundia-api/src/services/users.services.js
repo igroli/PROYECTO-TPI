@@ -2,29 +2,25 @@ import { Users } from "../models/Users.js";
 import bcrypt from "bcrypt";
 
 // get users
-export const getUsers = async(req, res) => {
-    const users = await Users.findAll();
-    console.log('los usuarios son', users)
-    res.json(users);
+export const getUsers = async (req, res) => {
+  const users = await Users.findAll();
+  console.log('los usuarios son', users)
+  res.json(users);
 }
 
 //get user logged in
-export const getUserLogged = async(req, res) => {
-    return res.json(req.usuario);
+export const getUserLogged = async (req, res) => {
+  return res.json(req.usuario);
 }
 
 // traer usuarios con rol
-export const getUserId = async(req, res) => {
-    const usersId = await Users.findAll(
-        
-    )
+export const getUserId = async (req, res) => {
+  const usersId = await Users.findAll()
 }
-
-
 
 export const updateUser = async (req, res) => {
   try {
-    const id_users = req.usuario.id_users; 
+    const id_users = req.usuario.id_users;
     const { name, last_name, phone_number, image_url, password } = req.body;
 
     const dataToUpdate = {};
@@ -43,7 +39,7 @@ export const updateUser = async (req, res) => {
     });
 
     if (rowsUpdated === 0) {
-      return res.status(400).json({ message: "No se realizaron cambios." });    
+      return res.status(400).json({ message: "No se realizaron cambios." });
     }
 
     const updatedUser = await Users.findByPk(id_users, {
@@ -51,6 +47,25 @@ export const updateUser = async (req, res) => {
     });
 
     return res.json({ message: "¡Perfil actualizado!", user: updatedUser });
+
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+export const deleteUser = async (req, res) => {
+  try {
+    const id_users = req.usuario.id_users;
+
+    const deleted = await Users.destroy({
+      where: { id_users }
+    });
+
+    if (deleted === 0) {
+      return res.status(404).json({ message: "Usuario no encontrado." });
+    }
+
+    return res.json({ message: "Cuenta eliminada correctamente." });
 
   } catch (error) {
     return res.status(500).json({ error: error.message });

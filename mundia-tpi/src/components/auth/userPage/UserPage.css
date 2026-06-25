@@ -177,6 +177,20 @@
   color: #fff;
 }
 
+.delete-account-link {
+  font-size: 0.75rem;
+  color: #aaa;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 8px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.delete-account-link:hover {
+  color: #e74c3c;
+}
+
 .modal-content {
   border: none;
   border-radius: 8px;

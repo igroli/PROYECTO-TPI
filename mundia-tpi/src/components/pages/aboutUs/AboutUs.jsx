@@ -20,7 +20,7 @@ const AboutUs = () => {
       {agents.map((agent) => {
         return(
         <AboutUsCard key={agent.id_users} 
-        name={agent.name} 
+        name={agent.name}
         last_name={agent.last_name}
         image_url={agent.image_url}
         email={agent.email}
