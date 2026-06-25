@@ -61,7 +61,7 @@ const UserPage = () => {
 
     if (name === "phone_number") {
       const soloNumeros = value.replace(/\D/g, "");
-      if (soloNumeros.length > 10) return;
+      if (soloNumeros.length > 13) return;
       setFormData({ ...formData, [name]: soloNumeros });
       return;
     }
@@ -72,8 +72,8 @@ const UserPage = () => {
   const handleSaveProfile = async (e) => {
     e.preventDefault();
 
-    if (formData.phone_number && formData.phone_number.length !== 10) {
-      alert("El número de teléfono debe contener 10 dígitos.");
+    if (formData.phone_number && formData.phone_number.length !== 13) {
+      alert("El número de teléfono debe contener 13 dígitos.");
       return;
     }
 
@@ -141,7 +141,7 @@ const UserPage = () => {
 
   return (
     <Container className="py-5 user-card-container">
-      <Row className="w-100">
+      <Row className="w-130">
         <Col md={{ span: 10, offset: 1 }}>
           <div className="mb-4">
             <h2 className="user-section-title">Mi Perfil</h2>
@@ -250,7 +250,7 @@ const UserPage = () => {
                 name="phone_number" 
                 value={formData.phone_number} 
                 onChange={handleChange} 
-                placeholder="Ej: 1234567890"
+                placeholder="Ej: 1234567891234"
                 required
               />
               <Form.Text className="text-muted">
