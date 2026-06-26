@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Layout
 import NavBar from "./components/layout/navBar/NavBar";
@@ -33,8 +35,8 @@ import AddAgents from "./components/business/addAgents/AddAgents";
 function App() {
   return (
     <BrowserRouter>
+      <ToastContainer position="bottom-right" autoClose={1500} />
       <Routes>
-        {/* ===== LAYOUT BASE (NavBar + Footer) ===== */}
         <Route
           path="/"
           element={
@@ -45,7 +47,6 @@ function App() {
             </>
           }
         >
-          {/* ===== RUTAS PÚBLICAS ===== */}
           <Route index element={<Home />} />
           <Route path="contact" element={<ContactForm />} />
           <Route path="aboutus" element={<AboutUs />} />
@@ -55,7 +56,6 @@ function App() {
           <Route path="register" element={<Register />} />
           <Route path="valuations" element={<Valuations />} />
 
-          {/* ===== RUTAS PROTEGIDAS ===== */}
           <Route
             path="addproperty"
             element={
@@ -64,7 +64,6 @@ function App() {
               </Protected>
             }
           />
-
           <Route
             path="addagents"
             element={
@@ -73,7 +72,6 @@ function App() {
               </Protected>
             }
           />
-
           <Route
             path="myreservations"
             element={
@@ -82,7 +80,6 @@ function App() {
               </Protected>
             }
           />
-
           <Route
             path="myprofile"
             element={
@@ -91,7 +88,6 @@ function App() {
               </Protected>
             }
           />
-
           <Route
             path="reserve"
             element={
@@ -100,8 +96,6 @@ function App() {
               </Protected>
             }
           />
-
-          {/* ===== NOT FOUND DENTRO DEL LAYOUT ===== */}
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
