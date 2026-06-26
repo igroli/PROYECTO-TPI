@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { registerUser } from '../services/register.services.js';
 import { loginUser } from '../services/login.services.js';
-import { getUserLogged, getUsers, updateUser } from '../services/users.services.js';
+import { getUserLogged, getUsers, updateUser, deleteUser } from '../services/users.services.js';
 import { verifyToken } from '../middlewares/verifyToken.js';
 
 const router = Router();
@@ -17,5 +17,7 @@ router.get("/users", verifyToken, getUsers );
 router.get("/usersme", verifyToken, getUserLogged)
 
 router.put("/users/profile", verifyToken, updateUser);
+
+router.delete("/users/delete", verifyToken, deleteUser);
 
 export default router;
