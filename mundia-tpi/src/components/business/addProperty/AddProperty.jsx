@@ -114,48 +114,52 @@ const AddProperty = () => {
               />
             </Form.Group>
           </Row>
-          <Row className="mb-3">
-            <Form.Group as={Col} controlId="formGridCity">
-              <Form.Label>Habitaciones</Form.Label>
-              <Form.Control
-                name="rooms"
-                type="number"
-                placeholder="Ingrese cantidad de habitaciones"
-                onChange={handleChange}
-                value={formData.rooms}
-              />
-            </Form.Group>
-            <Form.Group as={Col} controlId="formGridCity">
-              <Form.Label>Agente encargado</Form.Label>
-              <Form.Control
-                name="id_agents"
-                type="number"
-                placeholder="Ingrese id del agente"
-                onChange={handleChange}
-                value={formData.id_agents}
-              />
-            </Form.Group>
-            <Form.Group as={Col} controlId="formGridCity">
-              <Form.Label>Baños</Form.Label>
-              <Form.Control
-                name="bathroom"
-                type="number"
-                placeholder="Ingrese cantidad de baños"
-                onChange={handleChange}
-                value={formData.bathroom}
-              />
-            </Form.Group>
-            <Form.Group as={Col} controlId="formGridCity">
-              <Form.Label>Metros cuadrados</Form.Label>
-              <Form.Control
-                name="square_mts"
-                type="text"
-                placeholder="Ingrese cantidad de metros cuadrados"
-                onChange={handleChange}
-                value={formData.square_mts}
-              />
-            </Form.Group>
-          </Row>
+          {/* Agregamos la clase align-items-end aquí */}
+<Row className="mb-3 align-items-end">
+  <Form.Group as={Col} controlId="formGridRooms">
+    <Form.Label>Habitaciones</Form.Label>
+    <Form.Control
+      name="rooms"
+      type="number"
+      placeholder="Ingrese cantidad de habitaciones"
+      onChange={handleChange}
+      value={formData.rooms}
+    />
+  </Form.Group>
+  
+  <Form.Group as={Col} controlId="formGridAgent">
+    <Form.Label>Agente encargado</Form.Label>
+    <Form.Control
+      name="id_agents"
+      type="number"
+      placeholder=" ID del agente"
+      onChange={handleChange}
+      value={formData.id_agents}
+    />
+  </Form.Group>
+  
+  <Form.Group as={Col} controlId="formGridBathroom">
+    <Form.Label>Baños</Form.Label>
+    <Form.Control
+      name="bathroom"
+      type="number"
+      placeholder="Ingrese cantidad de baños"
+      onChange={handleChange}
+      value={formData.bathroom}
+    />
+  </Form.Group>
+  
+  <Form.Group as={Col} controlId="formGridSquareMts">
+    <Form.Label>Metros cuadrados</Form.Label>
+    <Form.Control
+      name="square_mts"
+      type="text"
+      placeholder="Ingrese cantidad de metros cuadrados"
+      onChange={handleChange}
+      value={formData.square_mts}
+    />
+  </Form.Group>
+</Row>
           <Row className="mb-3">
             <Form.Group as={Col} controlId="formGridCity">
               <Form.Label>Dirección</Form.Label>

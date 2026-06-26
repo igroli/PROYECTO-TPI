@@ -36,5 +36,6 @@
 
 .carousel-caption h3,
 .carousel-caption p {
-  color: var(--text);
+  color: var(--text-primary);
 }
+
