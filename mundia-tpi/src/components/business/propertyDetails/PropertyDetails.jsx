@@ -26,6 +26,7 @@ const PropertyDetails = () => {
     }
   };
 
+
   return (
 
     <div className="property-details">

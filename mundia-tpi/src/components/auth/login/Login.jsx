@@ -2,9 +2,10 @@ import { useContext, useRef, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import { errorToast } from "../../ui/notifications/notifications";
 import { AuthenticationContext } from "../auth.context";
 import { loginUser } from "./login.services";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -36,13 +37,13 @@ const Login = () => {
 
     if (!emailRef.current.value.length) {
       setErrors({ ...errors, email: true });
-      alert("Ingrese su email.");
+      toast.error("Ingrese su email.");
       emailRef.current.focus();
       setMessage(true);
       return;
     } else if (!password.length || password.length < 8) {
       setErrors({ ...errors, password: true });
-      alert("La contraseña debe tener como mínimo 8 caracteres.");
+      toast.error("La contraseña debe tener como mínimo 8 caracteres.");
       passwordRef.current.focus();
       setMessage(true);
       return;
@@ -53,9 +54,11 @@ const Login = () => {
     try {
       const data = await loginUser(email, password);
       handleUserLogIn(data);
+      toast.success("¡Inicio de sesión exitoso!");
       console.log("Token creado!");
-      navigate('/');
+      setTimeout(() => navigate('/'), 1500);  // espera que se vea el toast antes de navegar
     } catch (err) {
+      toast.error("Email o contraseña incorrectos.");
       console.log("Hubo un error:", err.message);
     }
   };
@@ -97,6 +100,7 @@ const Login = () => {
         </Form>
         {message && <p>Debe completar los campos para iniciar sesión.</p>}
       </div>
+      <ToastContainer position="bottom-right" autoClose={2000}/>
     </div>
   );
 };

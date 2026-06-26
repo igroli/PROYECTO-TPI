@@ -3,6 +3,8 @@ import { Container, Row, Col, Card, Modal, Form } from "react-bootstrap";
 import { User, Mail, Phone, Edit2, LogOut } from "lucide-react";
 import "./UserPage.css";
 import { AuthenticationContext } from "../auth.context";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const UserPage = () => {
 
@@ -73,7 +75,7 @@ const UserPage = () => {
     e.preventDefault();
 
     if (formData.phone_number && formData.phone_number.length !== 13) {
-      alert("El número de teléfono debe contener 13 dígitos.");
+      toast.error("El número de teléfono debe contener 13 dígitos.");
       return;
     }
 
@@ -93,10 +95,12 @@ const UserPage = () => {
         const data = await response.json();
         setUserInfo(data.user);
         setShowModal(false);
+        toast.success("¡Perfil actualizado con éxito!");
       } else {
-        alert("Ocurrió un error al intentar guardar los cambios en el servidor.");
+        toast.error("Ocurrió un error al intentar guardar los cambios.");
       }
     } catch (error) {
+      toast.error("Error de conexión.");
     } finally {
       setIsUpdating(false);
     }
@@ -115,10 +119,10 @@ const UserPage = () => {
       if (response.ok) {
         handleUserLogOut();
       } else {
-        alert("Ocurrió un error al intentar eliminar la cuenta.");
+        toast.error("Ocurrió un error al intentar eliminar la cuenta.");
       }
     } catch (error) {
-      alert("Error de conexión.");
+      toast.error("Error de conexión.");
     }
   };
 
@@ -305,6 +309,7 @@ const UserPage = () => {
         </Modal.Body>
       </Modal>
 
+      <ToastContainer position="bottom-right" autoClose={2000}/>
     </Container>
   );
 };

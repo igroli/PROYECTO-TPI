@@ -7,6 +7,8 @@ import "../../../index.css";
 import "./Navbar.css";
 import { AuthenticationContext } from "../../auth/auth.context";
 import ToggleTheme from "../../ui/theme/ToggleTheme";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const NavBar = () => {
   const [showDrawer, setShowDrawer] = useState(false);
@@ -17,6 +19,12 @@ const NavBar = () => {
 
   const handleNavigation = (path) => {
     navigate(path);
+    setShowDrawer(false);
+  };
+
+  const handleLogOut = () => {
+    toast.success("¡Sesión cerrada con éxito!");
+    setTimeout(() => handleUserLogOut(), 1500);
     setShowDrawer(false);
   };
 
@@ -54,7 +62,6 @@ const NavBar = () => {
               className={`drawer-overlay ${showDrawer ? "active" : ""}`}
               onClick={toggleDrawer}
             />
-            {/* acaaaaaaaaaaa*/}
             <div className={`user-drawer ${showDrawer ? "open" : ""}`}>
               <div className="drawer-header">
                 <h3>{token ? "Mi Cuenta" : "Bienvenido"}</h3>
@@ -95,7 +102,7 @@ const NavBar = () => {
                     <hr />
                     <Button
                       className="logout-btn w-100"
-                      onClick={handleUserLogOut}
+                      onClick={handleLogOut}
                     >
                       Cerrar Sesión
                     </Button>
@@ -126,6 +133,7 @@ const NavBar = () => {
           </Nav>
         </Container>
       </Navbar>
+      <ToastContainer position="bottom-right" autoClose={1500} />
     </>
   );
 };

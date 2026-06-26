@@ -4,8 +4,10 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { Button } from "react-bootstrap";
 import "react-day-picker/style.css";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { getUserFromToken } from "../../auth/getUserFromToken";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CalendarReservation = () => {
   const [selectedDate, setSelectedDate] = useState("");
@@ -22,11 +24,9 @@ const CalendarReservation = () => {
     "16:30",
   ];
 
-  // esta funcion hace que no se puedan hacer reservas a dias pasados o en los dias domingos (dia 0 en la fn getDay())
   const invalidDay = (date) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-
     return date < today || date.getDay() === 0;
   };
 
@@ -40,23 +40,19 @@ const CalendarReservation = () => {
 
     const fechaFormateada = format(selectedDate, "yyyy-MM-dd");
     const fechaHoraConcat = `${fechaFormateada}T${selectedTime}`;
-    //valido date
+
     if (!fechaHoraConcat) {
-      alert("Por favor, seleccione una fecha para la reserva.");
+      toast.error("Por favor, seleccione una fecha para la reserva.");
       return;
     }
 
-    // obtengo los ids del navigate
     const id_properties = location.state?.id;
     const id_agents = location.state?.id_agents;
-    // obtengo el id del usuario
     const token = localStorage.getItem("token");
     const id_users = getUserFromToken(token);
-    // valido users
+
     if (!id_users) {
-      alert(
-        "La sesión expiró o no has iniciado sesión. Por favor, vuelve a ingrear.",
-      );
+      toast.error("La sesión expiró o no has iniciado sesión. Por favor, vuelve a ingresar.");
       return;
     }
 
@@ -69,27 +65,28 @@ const CalendarReservation = () => {
         },
         body: JSON.stringify({
           reservation_date: fechaHoraConcat,
-          id_properties: id_properties,
-          id_users: id_users,
-          id_agents: id_agents,
+          id_properties,
+          id_users,
+          id_agents,
         }),
       });
 
       const resultado = await response.json();
 
       if (response.ok) {
-        alert("Reserva creada con éxito!");
+        toast.success("¡Reserva creada con éxito!");
         console.log("visita confirmada:", resultado);
         setSelectedDate("");
         setSelectedTime("");
       } else {
-        alert("Error al reservar.");
+        toast.error("Error al reservar.");
       }
     } catch (error) {
-      alert("Se ha producido un error");
+      toast.error("Se ha producido un error.");
       console.log("El error fue:", error);
     }
   };
+
   return (
     <div
       style={{
@@ -102,7 +99,6 @@ const CalendarReservation = () => {
       }}
     >
       <div>
-        {/* calendario de seleccion de fechas*/}
         <h3>Seleccione un día para la visita.</h3>
         <DayPicker
           mode="single"
@@ -123,8 +119,7 @@ const CalendarReservation = () => {
                   onClick={() => setSelectedTime(hora)}
                   style={{
                     padding: "0.5rem",
-                    backgroundColor:
-                      selectedTime === hora ? "#0040f3" : "#ffffff",
+                    backgroundColor: selectedTime === hora ? "#0040f3" : "#ffffff",
                     color: selectedTime === hora ? "white" : "black",
                     border: "1px solid #ccc",
                     borderRadius: "4px",
@@ -146,7 +141,7 @@ const CalendarReservation = () => {
                   color: "white",
                   border: "none",
                   borderRadius: "4px",
-                  fontWeigth: "bold",
+                  fontWeight: "bold",
                   cursor: "pointer",
                 }}
               >
@@ -156,11 +151,11 @@ const CalendarReservation = () => {
           </>
         ) : (
           <p>
-            Por favor, seleccione una fecha del calendario para ver la
-            disponibilidad horaria.
+            Por favor, seleccione una fecha del calendario para ver la disponibilidad horaria.
           </p>
         )}
       </div>
+      <ToastContainer position="bottom-right" autoClose={2000}/>
     </div>
   );
 };

@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import "./Register.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -24,7 +26,7 @@ const Register = () => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("Las contraseñas no coinciden");
+      toast.error("Las contraseñas no coinciden.");
       return;
     }
 
@@ -58,15 +60,13 @@ const Register = () => {
         setPassword("");
         setConfirmPassword("");
 
-        alert("Usuario creado con éxito!");
+        toast.success("¡Usuario creado con éxito!");
+        setTimeout(() => navigate("/"), 1500);
       })
       .catch((error) => {
-        console.log("Error detallado:", errorMsg);
+        toast.error("Error al crear el usuario. Intente nuevamente.");
+        console.log("Error detallado:", error.message);
       });
-
-    console.log(newUser);
-    navigate("/");
-
   };
 
   return (
@@ -148,6 +148,7 @@ const Register = () => {
           </Form.Group>
         </Form>
       </div>
+      <ToastContainer position="bottom-right" autoClose={2000}/>
     </>
   );
 };
