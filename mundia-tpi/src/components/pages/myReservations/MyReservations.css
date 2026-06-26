@@ -3,7 +3,9 @@
 }
 
 .card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .card:hover {
@@ -15,6 +17,82 @@
   font-weight: 500;
   padding: 0.5em 0.8em;
   border-radius: 6px;
+}
+
+/* Estilos para el modal personalizado similar a la imagen proporcionada */
+.custom-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.custom-modal {
+  width: 520px;
+  max-width: calc(100% - 32px);
+  background: #1f2937; /* panel oscuro similar */
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.custom-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.custom-modal-header h5 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.custom-modal-close {
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.custom-modal-body {
+  padding: 22px 20px;
+  color: #d1d5db;
+}
+
+.custom-modal-footer {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding: 18px 20px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.custom-modal-footer .btn {
+  min-width: 120px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.modal-cancel {
+  background: #374151; /* gris oscuro botón */
+  color: #e5e7eb;
+  border: none;
+}
+
+.modal-confirm {
+  background: #ef4444; /* rojo */
+  color: #fff;
+  border: none;
 }
 
 @media (max-width: 768px) {

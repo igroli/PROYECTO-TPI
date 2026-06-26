@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Calendar, Clock, MapPin, Home, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
+import './MyReservations.css'
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Card, Button, Badge } from "react-bootstrap";
 import { AuthenticationContext } from "../../auth/auth.context";
@@ -35,8 +36,26 @@ const MyReservations = () => {
 
   const handleDeleteReservation = (idReserva) => {
     console.log("ID A ELIMINAR", idReserva);
-    if (!window.confirm("¿Estás seguro de que deseas cancelar esta visita?"))
-      return;
+    
+  };
+
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [reservationToDelete, setReservationToDelete] = useState(null);
+
+  const openConfirm = (reservation) => {
+    setReservationToDelete(reservation);
+    setShowConfirm(true);
+  };
+
+  const closeConfirm = () => {
+    setShowConfirm(false);
+    setReservationToDelete(null);
+  };
+
+  const confirmDeleteReservation = () => {
+    const idReserva = reservationToDelete?.id_reservations;
+    if (!idReserva) return closeConfirm();
+
     fetch(`http://localhost:3000/reservations/${idReserva}`, {
       method: "DELETE",
       headers: {
@@ -49,17 +68,17 @@ const MyReservations = () => {
         return res.json();
       })
       .then((data) => {
-        console.log("Eliminado con éxito:", data);
-
         setReservations((prevReservations) =>
           prevReservations.filter(
             (reservation) => reservation.id_reservations !== idReserva,
           ),
         );
-
-        alert("Visita cancelada con éxito.");
+        closeConfirm();
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        closeConfirm();
+      });
   };
 
   const handleNavigate = (propertyData) => {
@@ -178,9 +197,7 @@ const MyReservations = () => {
                       <Button
                         variant="outline-danger"
                         className="d-flex align-items-center justify-content-center gap-2"
-                        onClick={() => {
-                          handleDeleteReservation(reservation.id_reservations);
-                        }}
+                        onClick={() => openConfirm(reservation)}
                       >
                         <Trash2 size={16} /> Cancelar Visita
                       </Button>
@@ -205,6 +222,26 @@ const MyReservations = () => {
           </Col>
         )}
       </Row>
+
+      {showConfirm && (
+        <div className="custom-modal-backdrop">
+          <div className="custom-modal" role="dialog" aria-modal="true">
+            <div className="custom-modal-header">
+              <h5>Cancelar visita</h5>
+              <button className="custom-modal-close" onClick={closeConfirm} aria-label="Cerrar">×</button>
+            </div>
+            <div className="custom-modal-body">
+              <p>
+                Deseas cancelar la reserva? Esta acción no se puede deshacer.
+              </p>
+            </div>
+            <div className="custom-modal-footer">
+              <button className="btn modal-cancel" onClick={closeConfirm}>Cancelar</button>
+              <button className="btn modal-confirm" onClick={confirmDeleteReservation}>Sí, cancelar visita</button>
+            </div>
+          </div>
+        </div>
+      )}
     </Container>
   );
 };

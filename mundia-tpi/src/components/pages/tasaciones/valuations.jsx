@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./valuations.css";
 import valuationsImage from "../../../assets/img/banner_tasaciones.png";
+import Swal from "sweetalert2";
 
 export default function Valuations() {
   const [formData, setFormData] = useState({
@@ -21,15 +22,55 @@ export default function Valuations() {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.acceptTerms) {
-      alert("Debes aceptar los términos y privacidad");
-      return;
-    }
-    console.log("Formulario enviado:", formData);
-    // Aca iría la lógica para enviar el formulario al backend
-  };
+ const handleSubmit = (e) => {
+  e.preventDefault();
+
+  if (
+    !formData.email ||
+    !formData.fullName ||
+    !formData.location ||
+    !formData.propertyType
+  ) {
+    Swal.fire({
+      icon: "error",
+      title: "Campos incompletos",
+      text: "Por favor, completá todos los campos obligatorios.",
+      confirmButtonColor: "#0d6efd",
+    });
+    return;
+  }
+
+  Swal.fire({
+    icon: "success",
+    title: "¡Formulario enviado!",
+    text: "Un asesor se pondrá en contacto contigo a la brevedad.",
+    confirmButtonText: "Aceptar",
+    confirmButtonColor: "#0d6efd",
+  });
+
+  if (!formData.acceptTerms) {
+  Swal.fire({
+    icon: "error",
+    title: "Términos y condiciones",
+    text: "Debés aceptar los términos y condiciones para continuar.",
+    confirmButtonColor: "#0d6efd",
+  });
+  return;
+}
+
+  console.log("Formulario enviado:", formData);
+
+  // Opcional: limpiar el formulario
+  setFormData({
+    fullName: "",
+    email: "",
+    phone: "",
+    location: "",
+    propertyType: "",
+    comments: "",
+    acceptTerms: false,
+  });
+};
 
   return (
     <div className="valuations-container">
@@ -76,7 +117,8 @@ export default function Valuations() {
                 placeholder="Ingrese teléfono"
                 value={formData.phone}
                 onChange={handleChange}
-              />
+                required
+                />
             </div>
 
             <div className="form-group">
@@ -88,10 +130,10 @@ export default function Valuations() {
                 onChange={handleChange}
                 required
               >
-
-                <option value="casa">Casa</option>
-                <option value="departamento">Departamento</option>
-                <option value="otro">Otro</option>
+            <option value="">Seleccione una opción</option>
+            <option value="casa">Casa</option>
+             <option value="departamento">Departamento</option>
+           <option value="otro">Otro</option>
               </select>
             </div>
 
@@ -133,7 +175,7 @@ export default function Valuations() {
                 onChange={handleChange}
               />
               <label htmlFor="acceptTerms">
-                Mantenerme al tanto de promociones y/o descuentos
+                Acepto los términos y condiciones para continuar con el envío del formulario.
               </label>
             </div>
 
