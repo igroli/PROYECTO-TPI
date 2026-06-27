@@ -50,7 +50,7 @@ const Register = () => {
           const errorMsg = await res.text();
           throw new Error(errorMsg);
         }
-        return res.json();
+        return res.text();
       })
       .then(() => {
         setName("");
