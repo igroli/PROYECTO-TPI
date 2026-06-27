@@ -154,7 +154,7 @@ const UserPage = () => {
 
           <Card className="user-profile-card">
             <Row className="g-0">
-              <Col md={4} className="avatar-container">
+              <Col md={3} className="avatar-container">
                 <div className="profile-avatar">
                   {userInfo.image_url ? (
                     <img 
@@ -168,7 +168,7 @@ const UserPage = () => {
                 </div>
               </Col>
 
-              <Col md={5} className="user-info-body">
+              <Col md={6} className="user-info-body">
                 <div className="user-name">
                   {userInfo.name} {userInfo.last_name}
                 </div>
