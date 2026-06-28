@@ -5,8 +5,6 @@ import { isTokenValid } from "../auth.helpers";
 
 const Protected = ({ children, allowedRoles }) => {
   const { token, user } = useContext(AuthenticationContext);
-
-  console.log("DEBUG ROLES -> Permitidos:", allowedRoles, "Usuario actual:", user);
   
   if (!isTokenValid(token)) {
     return <Navigate to="/login" replace />;

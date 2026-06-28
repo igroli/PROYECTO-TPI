@@ -21,7 +21,13 @@ import PropertyDetails from "./components/business/propertyDetails/PropertyDetai
 import CalendarReservation from "./components/business/calendarReservation/CalendarReservation";
 import AddAgents from "./components/business/addAgents/AddAgents";
 import AddProperty from "./components/business/addProperty/AddProperty";
-
+import AgentMyProperties from "./components/Agent/agentMyProperties/AgentMyProperties";
+import AgentPendingReservations from "./components/Agent/agentPendingReservations/AgentPendingReservations";
+import NewReservation from "./components/Agent/newReservation/NewReservation";
+import AdminProperties from "./components/pages/adminActions/AdminProperties";
+import AdminReservations from "./components/pages/adminActions/AdminReservations";
+import AdminAgents from "./components/pages/adminActions/AdminAgents";
+import AdminUsers from "./components/pages/adminActions/AdminUsers";
 function App() {
   return (
     <BrowserRouter>
@@ -48,35 +54,90 @@ function App() {
           <Route path="valuations" element={<Valuations />} />
           <Route path="*" element={<NotFound />} />
           <Route path="unauthorized" element={<Unauthorized />} />
-          
-          {/* rutas de agent y admin */}
+
+          {/* rutas de agent*/}
           <Route
-            path="addproperty"
+            path="/admin/properties/addProperty"
             element={
-              <Protected allowedRoles={['Admin', 'Agent']}>
+              <Protected allowedRoles={["Admin", "Agent"]}>
                 <AddProperty />
-              </Protected>
-            }
-          />
-          <Route
-            path="addagents"
-            element={
-              <Protected allowedRoles={['Admin', 'Agent']}>
-                <AddAgents />
               </Protected>
             }
           />
           <Route
             path="adminpanel"
             element={
-              <Protected allowedRoles={['Admin', 'Agent']}>
+              <Protected allowedRoles={["Admin", "Agent"]}>
                 <AdminPanel />
+              </Protected>
+            }
+          />
+          <Route
+            path="/admin/myproperties"
+            element={
+              <Protected allowedRoles={["Agent"]}>
+                <AgentMyProperties />
+              </Protected>
+            }
+          />
+          <Route
+            path="/admin/reservations"
+            element={
+              <Protected allowedRoles={["Agent"]}>
+                <AgentPendingReservations />
+              </Protected>
+            }
+          />
+          <Route
+            path="admin/reservations/new"
+            element={
+              <Protected allowedRoles={["Agent"]}>
+                <NewReservation />
+              </Protected>
+            }
+          />
+          <Route
+            path="/admin/properties"
+            element={
+              <Protected allowedRoles={["Agent", "Admin"]}>
+                <AdminProperties />
+              </Protected>
+            }
+          />
+          <Route
+            path="/admin/reservationslist"
+            element={
+              <Protected allowedRoles={["Agent", "Admin"]}>
+                <AdminReservations />
               </Protected>
             }
           />
 
           {/* rutas de admin */}
-
+          <Route
+            path="/admin/agents/addAgents"
+            element={
+              <Protected allowedRoles={["Admin", "Agent"]}>
+                <AddAgents />
+              </Protected>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <Protected allowedRoles={["Admin"]}>
+                <AdminUsers />
+              </Protected>
+            }
+          />
+          <Route
+            path="/admin/agents"
+            element={
+              <Protected allowedRoles={["Admin"]}>
+                <AdminAgents />
+              </Protected>
+            }
+          />
           {/* rutas para cualquier usuario logeado */}
           <Route
             path="myreservations"

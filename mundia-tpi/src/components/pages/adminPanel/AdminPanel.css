@@ -1,94 +1,153 @@
 .admin-panel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: auto;
-  padding: 24px 20px 20px;
-  box-sizing: border-box;
-  text-align: center;
-  width: 100%;
+  padding: 2.5rem 2rem;
+  font-family: inherit;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.admin-panel-eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #888;
+  margin: 0 0 6px;
 }
 
 .admin-panel-title {
-  margin-top: 20px;
-  margin-bottom: 24px;
-  font-size: clamp(1.7rem, 2.2vw, 2.6rem);
-  font-weight: 700;
-  text-align: center;
-  color: #1f2937;
+  font-size: 36px;
+  font-weight: 500;
+  margin: 0 0 4px;
+  letter-spacing: -0.02em;
+}
+
+.admin-panel h2 {
+  font-size: 18px;
+  font-weight: 400;
+  color: #555;
+  margin: 0 0 2rem;
+}
+
+.admin-panel h3 {
+  font-size: 13px;
+  color: #999;
+  font-weight: 400;
+  margin: 0 0 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .admin-panel-sections {
   display: grid;
-  gap: 18px;
-  width: 100%;
-  max-width: 1400px;
-  align-items: flex-start;
+  gap: 14px;
+  grid-template-columns: repeat(2, 1fr);
 }
 
-.admin-panel-sections--2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
+.admin-panel-sections--2,
 .admin-panel-sections--4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .admin-panel-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 18px;
-  border: 2px solid #e5e7eb;
-  border-radius: 16px;
-  background: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  height: auto;
-}
-
-.admin-panel-section-title {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 16px;
-  color: #111827;
+  display: contents;
 }
 
 .admin-panel-buttons {
+  display: contents;
+}
+
+.admin-panel-section .admin-panel-buttons button {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  justify-content: center;
-  width: 100%;
-  align-items: stretch;
-}
-
-.admin-panel-btn1,
-.admin-panel-btn2,
-.admin-panel-btn3,
-.admin-panel-btn4 {
-  min-height: 70px;
-  padding: 12px 18px;
-  border: 2px solid rgba(255, 255, 255, 0.8);
-  border-radius: 12px;
-  color: white;
-  font-weight: 700;
-  font-size: 0.95rem;
+  justify-content: flex-end;
+  padding: 2rem 2rem 1.75rem;
+  border-radius: 18px;
+  border: none;
   cursor: pointer;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  min-height: 170px;
+  text-align: left;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.admin-panel-section .admin-panel-buttons button i {
+  font-size: 36px;
+}
+
+.admin-panel-section .admin-panel-buttons button:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.06);
+}
+
+.admin-panel-section .admin-panel-buttons button:active {
+  transform: scale(0.97);
+}
+
+.admin-panel-btn1 {
+  background: #3C3489;
+  color: #EEEDFE;
+}
+
+.admin-panel-btn2 {
+  background: #0F6E56;
+  color: #E1F5EE;
+}
+
+.admin-panel-btn3 {
+  background: #185FA5;
+  color: #E6F1FB;
+}
+
+.admin-panel-btn4 {
+  background: #993C1D;
+  color: #FAECE7;
+}
+
+.admin-panel-quicklinks {
+  grid-column: 1 / -1;
+  background: #f8f8f7;
+  border: 0.5px solid #e0deda;
+  border-radius: 18px;
+  padding: 1.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.quicklinks-title {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #999;
+  margin: 0 0 10px;
+}
+
+.quicklinks-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 15px;
   width: 100%;
+  text-align: left;
+  transition: background 0.12s ease;
 }
 
-.admin-panel-btn1:hover,
-.admin-panel-btn2:hover,
-.admin-panel-btn3:hover,
-.admin-panel-btn4:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
+.quicklinks-btn:hover { background: #f0efeb; }
 
-.admin-panel-btn1 { background-color: #F4C95D; }
-.admin-panel-btn2 { background-color: #04E762; }
-.admin-panel-btn3 { background-color: #274C77; }
-.admin-panel-btn4 { background-color: #FB3640; }
+.quicklinks-btn i { font-size: 18px; color: #888; width: 22px; }
+.quicklinks-btn span { flex: 1; }
+.quicklinks-btn .ti-chevron-right { font-size: 14px; color: #bbb; }
+
+.quicklinks-divider {
+  border: none;
+  border-top: 0.5px solid #e8e7e3;
+  margin: 2px 0;
+}

@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import { successToast } from "../../ui/notifications/notifications";
+import { AuthenticationContext } from "../../auth/auth.context";
 const AddAgents = () => {
   const [agents, setAgents] = useState([]);
-
+  const { token } = useContext(AuthenticationContext)
   const [formData, setFormData] = useState({
     name: "",
     last_name: "",
@@ -31,6 +32,7 @@ const AddAgents = () => {
     fetch("http://localhost:3000/agents", {
       method: "POST",
       headers: {
+        'Authorization': `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(agentData),

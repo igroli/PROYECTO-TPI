@@ -16,6 +16,7 @@ router.get("/users", verifyToken, getUsers );
 
 router.get("/usersme", verifyToken, getUserLogged)
 
+// rutas de admin
 router.put("/users/profile", verifyToken, updateUser);
 
 router.delete("/users/delete", verifyToken, deleteUser);

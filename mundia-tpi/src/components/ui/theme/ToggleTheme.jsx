@@ -7,8 +7,8 @@ function ToggleTheme() {
 
     return (
         <button className="theme-toggle-btn" onClick={toggleTheme}>
-            {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
-            <span>{theme === "light" ? "Oscuro" : "Claro"}</span>
+            {theme === "light" ? <Sun size={18} /> : <Moon size={18} /> }
+            <span>{theme === "light" ? "Claro" : "Oscuro"}</span>
         </button>
     );
 }

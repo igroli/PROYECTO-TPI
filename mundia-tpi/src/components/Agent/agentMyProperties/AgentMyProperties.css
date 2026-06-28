@@ -1,0 +1,154 @@
+.amp-wrap {
+  padding: 2.5rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: inherit;
+}
+
+.amp-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.amp-back {
+  background: none;
+  border: 0.5px solid #d0cec8;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #555;
+  margin-top: 4px;
+  white-space: nowrap;
+  transition: background 0.12s;
+}
+.amp-back:hover { background: #f3f2ee; }
+
+.amp-eyebrow {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #999;
+  margin: 0 0 4px;
+}
+
+.amp-title {
+  font-size: 28px;
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: -0.02em;
+  color: #1a1a18;
+}
+
+.amp-count {
+  margin-left: auto;
+  background: #185FA5;
+  color: #E6F1FB;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 20px;
+  padding: 4px 14px;
+  align-self: center;
+  white-space: nowrap;
+}
+
+.amp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.amp-card {
+  border: 0.5px solid #e0deda;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.amp-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+}
+
+.amp-card-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.amp-card-body {
+  padding: 1.25rem;
+}
+
+.amp-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.amp-badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.amp-badge--ok  { background: #EAF3DE; color: #3B6D11; }
+.amp-badge--off { background: #FCEBEB; color: #A32D2D; }
+
+.amp-type {
+  font-size: 12px;
+  color: #999;
+}
+
+.amp-card-title {
+  font-size: 17px;
+  font-weight: 500;
+  margin: 0 0 4px;
+  color: #1a1a18;
+}
+
+.amp-address {
+  font-size: 13px;
+  color: #888;
+  margin: 0 0 12px;
+}
+
+.amp-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 14px;
+}
+
+.amp-price {
+  font-size: 20px;
+  font-weight: 500;
+  color: #185FA5;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.amp-state {
+  padding: 3rem;
+  text-align: center;
+  color: #888;
+  font-size: 16px;
+}
+.amp-state--error { color: #A32D2D; }
+
+.amp-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #aaa;
+  font-size: 16px;
+  border: 0.5px dashed #d0cec8;
+  border-radius: 16px;
+}

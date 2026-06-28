@@ -93,13 +93,17 @@ const NavBar = () => {
                     >
                       Mis Reservas
                     </Button>
-                    <Button
+                    { user?.rol !== 'Client' && (
+                      <Button
                       variant="link"
                       className="w-100 text-start"
-                      onClick={() => handleNavigation("/favorites")}
+                      onClick={() => handleNavigation("/adminpanel")}
                     >
-                      Favoritos
+                      Panel de administrador
                     </Button>
+                    )
+                    }
+                    
                     <hr />
                     <Button
                       className="logout-btn w-100"

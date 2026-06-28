@@ -2,6 +2,7 @@ import { Users } from "../models/Users.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { Roles } from "../models/Roles.js";
+import { Agents } from "../models/Agents.js";
 
 export const loginUser = async (req, res) => {
   try {
@@ -30,13 +31,21 @@ export const loginUser = async (req, res) => {
         .status(401)
         .send({ message: "Email y/o contraseña incorrecta." });
 
+    const agent = await Agents.findOne({ where: { id_users: user.id_users } });
+    const tokenPayload = {
+      email: user.email,
+      id_users: user.id_users,
+      name: user.name,
+      rol: rolName,
+    };
+
+    if (agent) {
+      tokenPayload.id_agents = agent.id_agents;
+    }
+
     const secretKey = "contraseñarandom";
 
-    const token = jwt.sign(
-      { email: user.email, id_users: user.id_users, name: user.name, rol: rolName },
-      secretKey,
-      { expiresIn: "1h" },
-    );
+    const token = jwt.sign(tokenPayload, secretKey, { expiresIn: "1h" });
 
     return res.json(token);
   } catch (error) {

@@ -9,6 +9,7 @@ export const getAgents = async (req, res) => {
       attributes: ['id_users', 'name', 'last_name', 'email', 'image_url', 'phone_number'],
       include: [{
         model: Roles,
+        as: 'rol',
         attributes: ['name'],
         where: { name: 'Agent' }
       }]

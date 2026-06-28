@@ -11,6 +11,7 @@ export const getUserFromToken = (token) => {
 
     return {
       id_users: decoded.id_users,
+      id_agents: decoded.id_agents,
       name: decoded.name || decoded.userName || "Usuario",
       rol: decoded.rol?.name || decoded.rol || "Client"
     }

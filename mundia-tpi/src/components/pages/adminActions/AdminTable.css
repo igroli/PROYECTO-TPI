@@ -1,0 +1,161 @@
+.at-wrap {
+  padding: 2.5rem 2rem;
+  margin: 0 auto;
+  font-family: inherit;
+}
+
+.at-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.at-back {
+  background: none;
+  border: 0.5px solid #d0cec8;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #555;
+  margin-top: 4px;
+  white-space: nowrap;
+  transition: background 0.12s;
+}
+.at-back:hover { background: #f3f2ee; }
+
+.at-eyebrow {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #999;
+  margin: 0 0 4px;
+}
+
+.at-title {
+  font-size: 28px;
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: -0.02em;
+  color: #1a1a18;
+}
+
+.at-count {
+  margin-left: auto;
+  background: #3C3489;
+  color: #EEEDFE;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 20px;
+  padding: 4px 14px;
+  align-self: center;
+}
+
+/* Tabla */
+.at-table-wrap {
+  overflow-x: auto;
+  border: 0.5px solid #e0deda;
+  border-radius: 16px;
+}
+
+.at-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.at-table thead tr {
+  border-bottom: 0.5px solid #e0deda;
+}
+
+.at-table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #999;
+  white-space: nowrap;
+}
+
+.at-table td {
+  padding: 12px 16px;
+  border-bottom: 0.5px solid #f0efeb;
+  color: #1a1a18;
+  vertical-align: middle;
+}
+
+.at-table tbody tr:last-child td { border-bottom: none; }
+
+.at-table tbody tr:hover { background: #faf9f7; }
+
+.at-row--editing { background: #f5f3ff !important; }
+
+.at-id {
+  font-size: 12px;
+  color: #bbb;
+  font-weight: 500;
+}
+
+/* Input inline */
+.at-input {
+  height: 32px;
+  padding: 0 10px;
+  border: 0.5px solid #c0bdb8;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #1a1a18;
+  background: #fff;
+  outline: none;
+  width: 100%;
+  min-width: 100px;
+  box-sizing: border-box;
+}
+.at-input:focus { border-color: #3C3489; box-shadow: 0 0 0 3px rgba(60,52,137,0.1); }
+
+/* Botones de acción */
+.at-actions { white-space: nowrap; }
+
+.at-btn {
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: filter 0.12s;
+  margin-right: 6px;
+}
+.at-btn:last-child { margin-right: 0; }
+.at-btn:hover { filter: brightness(0.93); }
+
+.at-btn--edit   { background: #EEEDFE; color: #3C3489; }
+.at-btn--delete { background: #FCEBEB; color: #A32D2D; }
+.at-btn--save   { background: #EAF3DE; color: #3B6D11; }
+.at-btn--cancel { background: #f3f2ee; color: #555; }
+
+/* Estados */
+.at-state {
+  padding: 3rem;
+  text-align: center;
+  color: #888;
+  font-size: 16px;
+}
+.at-state--error { color: #A32D2D; }
+
+.at-btn--add {
+  margin-left: auto;
+  background: #3C3489;
+  color: #EEEDFE;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: filter 0.12s;
+  white-space: nowrap;
+}
+.at-btn--add:hover { filter: brightness(1.1); }

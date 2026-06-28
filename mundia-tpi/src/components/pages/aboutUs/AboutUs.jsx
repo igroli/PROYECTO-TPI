@@ -3,21 +3,33 @@ import { AboutUsCard } from "../../business/aboutUsCard/AboutUsCard";
 import "./AboutUs.css";
 
 const AboutUs = () => {
-  const [agents, setAgents] = useState([]);
-  const url = `http://localhost:3000/agents`;
+  const [agents, setAgents] = useState(null);
 
   useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        setAgents(data);
+    fetch('http://localhost:3000/agents')
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`El servidor ha respondido con status: ${res.status}`);
+        }
+        return res.json();
       })
-      .catch((error) => console.log(error));
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setAgents(data);
+        } else {
+          console.error("Data recibida no es un array:", data);
+          setAgents([]);
+        }
+      })
+      .catch((error) => {
+        console.error("Fetch error:", error);
+        setAgents([]);
+      });
   }, []);
 
   return (
     <div className="about">
-      {agents.map((agent) => {
+      {agents?.map((agent) => {
         return(
         <AboutUsCard key={agent.id_users} 
         name={agent.name}

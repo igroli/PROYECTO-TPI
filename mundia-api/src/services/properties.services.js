@@ -18,10 +18,18 @@ export const getProperties = async(req, res) => {
 
 // obtener las propiedades y el usuario puede poner un filtro de si es alquiler o venta
 export const getPropertiesFiltered = async (req, res) => {
-  const { type_transactions } = req.query;
+  const { type_transactions, id_agents } = req.query;
 
-  const where = type_transactions ? { type_transactions } : {};
-  console.log("Where: ", where);
+  const where = {};
+
+  if (type_transactions) {
+    where.type_transactions = type_transactions;
+  }
+
+  if (id_agents) {
+    where.id_agents = id_agents;
+  }
+
   try {
     const propiedades = await Properties.findAll({ where });
     res.json(propiedades);
