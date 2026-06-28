@@ -27,10 +27,10 @@ async function createDB() {
     app.use(authRoutes);
     app.use(agentsRoutes);
     app.use(reservationRoutes);
-    
+    await sequelize.sync();
+
     app.listen(PORT);
 
-    await sequelize.sync();
     console.log("Data base succesfully synchronized!");
 
     console.log(`Server listening on port ${PORT}`);

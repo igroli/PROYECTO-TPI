@@ -19,5 +19,15 @@ export const Reservations = sequelize.define("Reservations", {
       "Finalizada",
     ),
     allowNull: false,
-  }
-});
+  },
+},
+{
+  indexes: [
+    {
+      unique: true,
+      fields: ['id_properties', 'reservation_date'],
+      name: 'unique_house_date_reservation',
+    }
+  ]
+}
+);

@@ -9,8 +9,11 @@ export const getUserFromToken = (token) => {
   try {
     const decoded = jwtDecode(token);
 
-    return decoded.id_users;
-    
+    return {
+      id_users: decoded.id_users,
+      name: decoded.name || decoded.userName || "Usuario",
+      rol: decoded.rol?.name || decoded.rol || "Client"
+    }
   } catch (error) {
     return null;
   }

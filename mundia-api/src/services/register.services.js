@@ -22,12 +22,7 @@ export const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     
-    const [clientRole] = await Roles.findOrCreate({
-        where: { name: "Client" },
-        defaults: {
-            description: "Usuario cliente por defecto",
-        },
-    });
+    const defaultRol = await Roles.findOne({ where: { name: 'Client'}})
 
     const newUser = await Users.create({
         name,
@@ -35,7 +30,7 @@ export const registerUser = async (req, res) => {
         email,
         password: hashedPassword,
         phone_number,
-        id_roles: clientRole.id_roles,
+        rol: defaultRol.id_roles,
     });
 
     res.json(newUser.id);

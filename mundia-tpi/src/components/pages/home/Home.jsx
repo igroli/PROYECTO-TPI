@@ -17,12 +17,6 @@ const Home = () => {
             </section>
             <section className="outlet__section-carousel">
                 <ControlledCarousel />
-                <Button onClick={() => navigate("/addproperty")} className="outlet__add-property-btn">
-                    Agregar propiedad
-                </Button>
-                <Button onClick={() => navigate("/addagents")} className="outlet__add-property-btn">
-                    Agregar agente
-                </Button>
             </section>
         </div>
     );
