@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
@@ -9,10 +9,12 @@ import { getUserFromToken } from "../../auth/getUserFromToken";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./CalendarReservation.css";
+import { AuthenticationContext } from "../../auth/auth.context";
 
 const CalendarReservation = () => {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
+  const { token, user } = useContext(AuthenticationContext);
 
   const location = useLocation();
 
@@ -49,8 +51,7 @@ const CalendarReservation = () => {
 
     const id_properties = location.state?.id;
     const id_agents = location.state?.id_agents;
-    const token = localStorage.getItem("token");
-    const id_users = getUserFromToken(token);
+    const id_users = user.id_users;
 
     if (!id_users) {
       toast.error(
@@ -58,6 +59,8 @@ const CalendarReservation = () => {
       );
       return;
     }
+
+    console.log("IDs enviados:", { id_properties, id_agents, id_users });
 
     try {
       const response = await fetch(
@@ -70,6 +73,7 @@ const CalendarReservation = () => {
           },
           body: JSON.stringify({
             reservation_date: fechaHoraConcat,
+            state: "Pendiente de confirmación",
             id_properties,
             id_users,
             id_agents,
