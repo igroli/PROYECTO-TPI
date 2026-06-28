@@ -13,7 +13,8 @@ import 'react-toastify/dist/ReactToastify.css';
 const NavBar = () => {
   const [showDrawer, setShowDrawer] = useState(false);
 
-  const { token, handleUserLogOut } = useContext(AuthenticationContext);
+  const { token, handleUserLogOut, user } = useContext(AuthenticationContext);
+  const isAuthenticated = Boolean(token);
   const toggleDrawer = () => setShowDrawer(!showDrawer);
   const navigate = useNavigate();
 
@@ -64,7 +65,7 @@ const NavBar = () => {
             />
             <div className={`user-drawer ${showDrawer ? "open" : ""}`}>
               <div className="drawer-header">
-                <h3>{token ? "Mi Cuenta" : "Bienvenido"}</h3>
+                <h3>{isAuthenticated ? `Bienvenido/a ${user?.name}!` : "Bienvenido"}</h3>
                 <Button
                   variant="link"
                   className="close-btn"
@@ -76,7 +77,7 @@ const NavBar = () => {
               </div>
 
               <div className="drawer-content">
-                {token ? (
+                {isAuthenticated ? (
                   <div className="menu-list">
                     <Button
                       variant="link"

@@ -3,11 +3,17 @@ import { Navigate } from "react-router-dom";
 import { AuthenticationContext } from "../auth.context";
 import { isTokenValid } from "../auth.helpers";
 
-const Protected = ({ children }) => {
-  const { token } = useContext(AuthenticationContext);
+const Protected = ({ children, allowedRoles }) => {
+  const { token, user } = useContext(AuthenticationContext);
 
+  console.log("DEBUG ROLES -> Permitidos:", allowedRoles, "Usuario actual:", user);
+  
   if (!isTokenValid(token)) {
     return <Navigate to="/login" replace />;
+  }
+
+  if (allowedRoles && !allowedRoles.includes(user?.rol)) {
+    return <Navigate to="/unauthorized" replace />
   }
 
   return children;

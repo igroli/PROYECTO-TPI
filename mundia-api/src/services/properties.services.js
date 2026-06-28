@@ -1,5 +1,7 @@
 import { Properties } from "../models/Properties.js";
 import { sequelize } from "../../db.js";
+import { Agents } from "../models/Agents.js";
+import { Users } from "../models/Users.js";
 
 // obtener todas las propiedades
 export const getProperties = async(req, res) => {
@@ -77,12 +79,3 @@ export const createProperty = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
-
-// crear favoritos 4 
-// crear reserva 3
-// crear agente 5
-
-// get favoritos
-// get agentes 2
-// get las reservas del usuario

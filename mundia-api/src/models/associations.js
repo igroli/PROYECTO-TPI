@@ -62,12 +62,14 @@ Properties.belongsToMany(
     });
 
 //relacion roles usuarios
-Roles.hasMany(Users, { 
+Roles.hasMany(Users, {
     foreignKey: 'id_roles',
+    as: 'rol',
 });
 
-Users.belongsTo(Roles, { 
+Users.belongsTo(Roles, {
     foreignKey: 'id_roles',
+    as: 'rol'
 });
 
 // relacion users agents
