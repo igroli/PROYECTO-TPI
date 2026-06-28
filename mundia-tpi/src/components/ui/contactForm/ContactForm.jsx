@@ -21,6 +21,8 @@ const ContactForm = () => {
       text: "Un agente se pondrá en contacto contigo a la brevedad.",
       confirmButtonText: "Aceptar",
       confirmButtonColor: "#0d6efd",
+    }).then(() => {
+      form.reset(); // Limpia todos los campos del formulario
     });
   };
 
