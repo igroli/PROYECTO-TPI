@@ -54,9 +54,8 @@ const Login = () => {
     try {
       const data = await loginUser(email, password);
       handleUserLogIn(data);
-      toast.success("¡Inicio de sesión exitoso!");
       console.log("Token creado!");
-      setTimeout(() => navigate('/'), 1500);  // espera que se vea el toast antes de navegar
+      navigate('/');
     } catch (err) {
       toast.error("Email o contraseña incorrectos.");
       console.log("Hubo un error:", err.message);

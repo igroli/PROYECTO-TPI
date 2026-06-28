@@ -18,6 +18,7 @@
 
 .user-section-subtitle {
   font-size: 1rem;
+  width: 100%;
   color: var(--text-muted);
   margin-bottom: 0;
   border-bottom: var(--secondary) 1px solid;

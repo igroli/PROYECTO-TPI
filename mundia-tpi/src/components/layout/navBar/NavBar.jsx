@@ -23,8 +23,8 @@ const NavBar = () => {
   };
 
   const handleLogOut = () => {
-    toast.success("¡Sesión cerrada con éxito!");
-    setTimeout(() => handleUserLogOut(), 1500);
+    handleUserLogOut();
+    navigate("/");
     setShowDrawer(false);
   };
 
