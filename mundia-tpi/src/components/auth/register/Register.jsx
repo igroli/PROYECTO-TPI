@@ -15,8 +15,9 @@ const Register = () => {
   const navigate = useNavigate();
 
   const regex = /^(?=.*\d).{8,}$/;
-  const onlyNums = /^\d+$/
+  const onlyNums = /^\d+$/;
   const nameRegex = /^[a-zA-ZÀ-ÿ\s]{2,}$/;
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -31,7 +32,7 @@ const Register = () => {
 
     const cleanName = name.trim();
     const cleanLastName = last_name.trim();
-    const cleanEmail = email.trim();
+    const cleanEmail = email.trim();    
     const cleanPhone = phone_number.trim();
 
 
@@ -39,7 +40,13 @@ const Register = () => {
       toast.error("El nombre y el apellido deben contener solo letras (mínimo 2 caracteres).");
       return;
     }
-    if (cleanPhone.length != 12) {
+
+    if (!emailRegex.test(cleanEmail)) {
+      toast.error("Por favor, ingrese un correo electrónico válido.");
+      return;
+    }
+
+    if (cleanPhone.length !== 12) {
       toast.error("El número de teléfono debe tener 12 caracteres.");
       return;
     }
@@ -49,15 +56,13 @@ const Register = () => {
       return;
     }
 
-
-
     if (password !== confirmPassword) {
       toast.error("Las contraseñas no coinciden.");
       return;
     }
 
     if (password.length < 8) {
-      toast.error("La contsraseña debe tener al menos 8 caracteres.");
+      toast.error("La contraseña debe tener al menos 8 caracteres.");
       return;
     }
 
@@ -65,8 +70,6 @@ const Register = () => {
       toast.error("La contraseña debe tener al menos un número.");
       return;
     }
-
-
 
     const newUser = {
       name: cleanName,
@@ -99,7 +102,7 @@ const Register = () => {
         setConfirmPassword("");
 
         toast.success("¡Usuario creado con éxito!");
-        setTimeout(() => navigate("/"), 1500);
+        setTimeout(() => navigate("/login"), 1500);
       })
       .catch((error) => {
         toast.error(error.message);
@@ -110,7 +113,7 @@ const Register = () => {
   return (
     <>
       <div className="register-container">
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} noValidate>
           <div className="form-row">
             <Form.Group>
               <Form.Label>Nombre</Form.Label>

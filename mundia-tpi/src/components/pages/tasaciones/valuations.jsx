@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./valuations.css";
 import valuationsImage from "../../../assets/img/banner_tasaciones.png";
-import Swal from "sweetalert2";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Valuations() {
   const [formData, setFormData] = useState({
@@ -14,6 +15,10 @@ export default function Valuations() {
     acceptTerms: false,
   });
 
+  const onlyNums = /^\d+$/;
+  const nameRegex = /^[a-zA-ZÀ-ÿ]{2,}$/;
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -22,58 +27,88 @@ export default function Valuations() {
     });
   };
 
- const handleSubmit = (e) => {
-  e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  if (
-    !formData.email ||
-    !formData.fullName ||
-    !formData.location ||
-    !formData.propertyType
-  ) {
-    Swal.fire({
-      icon: "error",
-      title: "Campos incompletos",
-      text: "Por favor, completá todos los campos obligatorios.",
-      confirmButtonColor: "#0d6efd",
+    const cleanEmail = formData.email.trim();
+    const cleanPhone = formData.phone.trim();
+    const cleanFullName = formData.fullName.trim();
+
+    if (
+      !cleanEmail ||
+      !cleanFullName ||
+      !formData.location ||
+      !formData.propertyType ||
+      !formData.comments ||
+      !cleanPhone
+    ) {
+      toast.error("Por favor, completá todos los campos obligatorios.");
+      return;
+    }
+
+    
+    if (!emailRegex.test(cleanEmail)) {
+      toast.error("Por favor, ingrese un correo electrónico válido.");
+      return;
+    }
+
+
+    const namesArray = cleanFullName.split(/\s+/);
+    const allNamesValid = namesArray.every(name => nameRegex.test(name));
+
+    if (namesArray.length < 2) {
+      toast.error("Por favor, ingrese su nombre y apellido completo.");
+      return;
+    }
+
+    if (!allNamesValid) {
+      toast.error("Cada nombre y apellido debe contener solo letras y un mínimo de 2 caracteres.");
+      return;
+    }
+
+
+    if (cleanPhone.length !== 12) {
+      toast.error("El número de teléfono debe tener 12 caracteres.");
+      return;
+    }
+
+    if (!onlyNums.test(cleanPhone)) {
+      toast.error("Teléfono: solo números del 0 al 9.");
+      return;
+    }
+
+    
+    if (!formData.acceptTerms) {
+      toast.error("Debés aceptar los términos y condiciones para continuar.");
+      return;
+    }
+
+    toast.success("¡Formulario enviado! Un asesor se pondrá en contacto contigo a la brevedad.");
+
+    console.log("Formulario enviado:", formData);
+
+    setFormData({
+      fullName: "",
+      email: "",
+      phone: "",
+      location: "",
+      propertyType: "",
+      comments: "",
+      acceptTerms: false,
     });
-    return;
-  }
-
-  Swal.fire({
-    icon: "success",
-    title: "¡Formulario enviado!",
-    text: "Un asesor se pondrá en contacto contigo a la brevedad.",
-    confirmButtonText: "Aceptar",
-    confirmButtonColor: "#0d6efd",
-  });
-
-  if (!formData.acceptTerms) {
-  Swal.fire({
-    icon: "error",
-    title: "Términos y condiciones",
-    text: "Debés aceptar los términos y condiciones para continuar.",
-    confirmButtonColor: "#0d6efd",
-  });
-  return;
-}
-
-  console.log("Formulario enviado:", formData);
-
-  // Opcional: limpiar el formulario
-  setFormData({
-    fullName: "",
-    email: "",
-    phone: "",
-    location: "",
-    propertyType: "",
-    comments: "",
-    acceptTerms: false,
-  });
-};
+  };
 
   return (
     <div className="valuations-container">
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+      />
+
       <div className="valuations-wrapper">
         <div className="valuations-content">
           <h1 className="valuations-title">Vendé tu propiedad</h1>
@@ -81,7 +116,7 @@ export default function Valuations() {
             Completá el formulario y una oficina adherida a la red MUNDIA se pondrá en contacto con vos para continuar con el proceso.
           </p>
 
-          <form className="valuations-form" onSubmit={handleSubmit}>
+          <form className="valuations-form" noValidate onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="email">Email</label>
               <input
@@ -91,7 +126,6 @@ export default function Valuations() {
                 placeholder="Ingrese email"
                 value={formData.email}
                 onChange={handleChange}
-                required
               />
             </div>
 
@@ -104,7 +138,6 @@ export default function Valuations() {
                 placeholder="Ingrese nombre completo"
                 value={formData.fullName}
                 onChange={handleChange}
-                required
               />
             </div>
 
@@ -117,8 +150,7 @@ export default function Valuations() {
                 placeholder="Ingrese teléfono"
                 value={formData.phone}
                 onChange={handleChange}
-                required
-                />
+              />
             </div>
 
             <div className="form-group">
@@ -128,12 +160,11 @@ export default function Valuations() {
                 name="propertyType"
                 value={formData.propertyType}
                 onChange={handleChange}
-                required
               >
-            <option value="">Seleccione una opción</option>
-            <option value="casa">Casa</option>
-             <option value="departamento">Departamento</option>
-           <option value="otro">Otro</option>
+                <option value="">Seleccione una opción</option>
+                <option value="casa">Casa</option>
+                <option value="departamento">Departamento</option>
+                <option value="otro">Otro</option>
               </select>
             </div>
 
@@ -146,7 +177,6 @@ export default function Valuations() {
                 placeholder="Ingrese localidad o provincia"
                 value={formData.location}
                 onChange={handleChange}
-                required
               />
             </div>
 
@@ -194,4 +224,3 @@ export default function Valuations() {
     </div>
   );
 }
-
