@@ -4,7 +4,6 @@ import bcrypt from "bcrypt";
 // get users
 export const getUsers = async (req, res) => {
   const users = await Users.findAll();
-  console.log('los usuarios son', users)
   res.json(users);
 }
 
@@ -53,10 +52,32 @@ export const updateUser = async (req, res) => {
   }
 };
 
+export const updateUsersByAdmin = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { id_roles } = req.body;
+
+    const user = await Users.findByPk(id);
+    console.log("usuario que desea editar: ", id);
+    if(!user) {
+      return res.status(404).json({ message: "El usuario que desea editar no se ha encontrado."});
+    }
+
+    await user.update({
+      id_roles
+    });
+    return res.status(200).json({ message: "Usuario actualizado correctamente." });
+
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Error del servidor al editar usuario."})
+  }
+}
+
 export const deleteUser = async (req, res) => {
   try {
-    const id_users = req.usuario.id_users;
-
+    const { id_users } = req.body;
+    console.log(req.body);
     const deleted = await Users.destroy({
       where: { id_users }
     });

@@ -19,19 +19,28 @@ const AdminProperties = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const token = localStorage.getItem("token");
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
-  };
 
   useEffect(() => {
-    fetch("http://localhost:3000/propiedades", { headers })
-      .then((r) => r.json())
-      .then(setRows)
-      .catch(() => setError("No se pudieron cargar las propiedades"))
-      .finally(() => setLoading(false));
-  }, []);
+  const fetchProperties = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await fetch("http://localhost:3000/propiedades", {
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+      const data = await res.json();
+      setRows(Array.isArray(data) ? data : data.properties ?? []);
+    } catch {
+      setError("No se pudieron cargar las propiedades");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchProperties();
+}, []);
 
   const startEdit = (row) => {
     setEditing(row.id_properties);
@@ -44,10 +53,14 @@ const AdminProperties = () => {
   };
 
   const saveEdit = async () => {
+    const token = localStorage.getItem("token")
     try {
       const res = await fetch(`http://localhost:3000/houses/${editing}`, {
         method: "PUT",
-        headers,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
         body: JSON.stringify(editData),
       });
       if (!res.ok) throw new Error();
@@ -63,11 +76,15 @@ const AdminProperties = () => {
   };
 
   const deleteRow = async (id) => {
+    const token = localStorage.getItem("token");
     if (!confirm("¿Seguro que querés eliminar esta propiedad?")) return;
     try {
       const res = await fetch(`http://localhost:3000/houses/${id}`, {
         method: "DELETE",
-        headers,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
       });
       if (!res.ok) throw new Error();
       setRows((prev) => prev.filter((r) => r.id_properties !== id));

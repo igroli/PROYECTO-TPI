@@ -26,10 +26,9 @@ const AdminReservations = () => {
     "Finalizada",
   ];
 
-  const token = localStorage.getItem("token");
-
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     fetch("http://localhost:3000/reservations/all", { headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'} })
       .then(res => {
         if(!res.ok) {
@@ -61,10 +60,14 @@ const AdminReservations = () => {
   };
 
   const saveEdit = async () => {
+    const token = localStorage.getItem("token");
     try {
       const res = await fetch(`http://localhost:3000/reservations/${editing}`, {
         method: "PUT",
-        headers,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
         body: JSON.stringify(editData),
       });
       if (!res.ok) throw new Error();
@@ -80,11 +83,15 @@ const AdminReservations = () => {
   };
 
   const deleteRow = async (id) => {
+    const token = localStorage.getItem("token");
     if (!confirm("¿Seguro que querés eliminar esta reserva?")) return;
     try {
       const res = await fetch(`http://localhost:3000/reservations/${id}`, {
         method: "DELETE",
-        headers,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
       });
       if (!res.ok) throw new Error();
       setRows((prev) => prev.filter((r) => r.id_reservations !== id));

@@ -69,7 +69,8 @@ Roles.hasMany(Users, {
 
 Users.belongsTo(Roles, {
     foreignKey: 'id_roles',
-    as: 'rol'
+    as: 'rol',
+    onDelete: "CASCADE"
 });
 
 // relacion users agents

@@ -28,6 +28,7 @@ import AdminProperties from "./components/pages/adminActions/AdminProperties";
 import AdminReservations from "./components/pages/adminActions/AdminReservations";
 import AdminAgents from "./components/pages/adminActions/AdminAgents";
 import AdminUsers from "./components/pages/adminActions/AdminUsers";
+
 function App() {
   return (
     <BrowserRouter>
@@ -117,7 +118,7 @@ function App() {
           <Route
             path="/admin/agents/addAgents"
             element={
-              <Protected allowedRoles={["Admin", "Agent"]}>
+              <Protected allowedRoles={["Admin"]}>
                 <AddAgents />
               </Protected>
             }

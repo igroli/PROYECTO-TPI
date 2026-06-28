@@ -41,6 +41,10 @@
   color: #1a1a18;
 }
 
+html[data-bs-theme="dark"] .at-title {
+  color: #ffffff;
+}
+
 .at-count {
   margin-left: auto;
   background: #3C3489;
@@ -55,6 +59,7 @@
 /* Tabla */
 .at-table-wrap {
   overflow-x: auto;
+  background-color: #e0deda;
   border: 0.5px solid #e0deda;
   border-radius: 16px;
 }

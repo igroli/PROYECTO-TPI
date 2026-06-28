@@ -87,3 +87,41 @@ export const createProperty = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const updateProperty = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    console.log(id);
+    console.log(req.body);
+    const property = await Properties.findByPk(id);
+
+    if (!property) {
+      return res.status(404).json({ message: "Propiedad no encontrada." });
+    }
+
+    await property.update(req.body);
+
+    return res.json({ message: "Propiedad actualizada correctamente.", property });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+export const deleteProperty = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const property = await Properties.findByPk(id);
+
+    if (!property) {
+      return res.status(404).json({ message: "Propiedad no encontrada." });
+    }
+
+    await property.destroy();
+
+    return res.json({ message: "Propiedad eliminada correctamente." });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
