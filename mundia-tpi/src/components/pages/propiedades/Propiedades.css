@@ -11,7 +11,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2rem; /* Aumentamos sutilmente la separación vertical */
+  width: 100%;
+}
+
+/* NUEVO: Forzamos a que el componente interno HouseCard se estire */
+.propiedades-content > div, 
+.propiedades-content > article { 
+  width: 100%;
+  max-width: 1100px; /* Tamaño ideal para que se vea mucho más grande en pantallas anchas */
 }
 
 .propiedades-content h1 {

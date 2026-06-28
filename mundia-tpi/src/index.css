@@ -76,7 +76,6 @@ button.theme-toggle-btn:hover {
   background-color: var(--surface-muted);
 }
 
-/* Override Bootstrap's bg-light for specific reservation action panels in dark mode */
 html[data-bs-theme="dark"]
   .d-flex.flex-column.justify-content-center.p-4.border-start.bg-light {
   background-color: var(--surface) !important;
@@ -84,7 +83,6 @@ html[data-bs-theme="dark"]
   color: var(--text) !important;
 }
 
-/* General safeguard: make .bg-light adapt in dark mode where appropriate */
 html[data-bs-theme="dark"] .bg-light {
   background-color: var(--surface) !important;
   color: var(--text) !important;

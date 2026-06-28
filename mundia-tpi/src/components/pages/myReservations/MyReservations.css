@@ -33,7 +33,7 @@
 .custom-modal {
   width: 520px;
   max-width: calc(100% - 32px);
-  background: #1f2937; /* panel oscuro similar */
+  background: #1f2937;
   color: #fff;
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
@@ -45,7 +45,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 18px 20px;
-  background: rgba(255, 255, 255, 0.03);
+  background: black;
 }
 
 .custom-modal-header h5 {
@@ -84,20 +84,13 @@
 }
 
 .modal-cancel {
-  background: #374151; /* gris oscuro botón */
+  background: #374151;
   color: #e5e7eb;
   border: none;
 }
 
 .modal-confirm {
-  background: #ef4444; /* rojo */
+  background: #ef4444;
   color: #fff;
   border: none;
-}
-
-@media (max-width: 768px) {
-  .border-start {
-    border-start: none !important;
-    border-top: 1px solid #dee2e6;
-  }
 }

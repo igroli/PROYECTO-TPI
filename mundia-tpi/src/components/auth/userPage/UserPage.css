@@ -1,4 +1,3 @@
-/* ─── UserPage Layout ─────────────────────────────────────────── */
 
 .user-card-container {
   min-height: 80vh;
@@ -25,15 +24,13 @@
 }
 
 /* Los estilos de abajo son para superponer a los 
-naturasres que ya trae bootstrap */
+naturasres que ya trae bootstrap d nain */
 
 .user-profile-card.card:hover {
   transform: none !important;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08) !important;
   transition: none !important;
 }
-
-/* ─── Card Principal ──────────────────────────────────────────── */
 
 .user-profile-card {
   background-color: var(--surface);
@@ -50,8 +47,6 @@ naturasres que ya trae bootstrap */
   margin: 0;
   flex: 1;
 }
-
-/* ─── Columna Izquierda ───────────────────────────────── */
 
 .avatar-container {
   background-color: var(--surface-muted);
@@ -81,8 +76,6 @@ naturasres que ya trae bootstrap */
   object-fit: cover;
   display: block;
 }
-
-/* ─── Columna Central ───────────────────────────── */
 
 .user-info-body {
   display: flex;
@@ -131,8 +124,6 @@ naturasres que ya trae bootstrap */
   color: var(--text);
   font-weight: 500;
 }
-
-/* ─── Columna Derecha ───────────────────────────────── */
 
 .user-actions-container {
   display: flex;
