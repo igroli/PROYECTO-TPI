@@ -31,8 +31,62 @@ export const getAgents = async (req, res) => {
 
 export const createAgents = async (req, res) => {
   try {
-    const { name, last_name, email, password, phone_number, image_url } =
-      req.body;
+    const { name, last_name, email, password, phone_number, image_url } = req.body;
+
+    // Expresiones regulares de validación (Mismo formato que el registro de usuarios)
+    const regex = /^(?=.*\d).{8,}$/;
+    const onlyNums = /^\d+$/;
+    const nameRegex = /^[a-zA-ZÀ-ÿ\s]{2,}$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    const cleanName = name?.trim();
+    const cleanLastName = last_name?.trim();
+    const cleanEmail = email?.trim();
+    const cleanPhone = phone_number?.trim();
+
+    if (!cleanName || !cleanLastName || !cleanEmail || !password || !cleanPhone) {
+        return res.status(400).send({ message: "Por favor, complete todos los campos obligatorios." });
+    }
+
+    if (!nameRegex.test(cleanName) || !nameRegex.test(cleanLastName)) {
+        return res.status(400).send({ message: "El nombre y el apellido deben contener solo letras (mínimo 2 caracteres)." });
+    }
+
+    if (!emailRegex.test(cleanEmail)) {
+        return res.status(400).send({ message: "Por favor, ingrese un correo electrónico válido." });
+    }
+
+    if (cleanPhone.length !== 12) {
+        return res.status(400).send({ message: "El número de teléfono debe tener 12 dígitos." });
+    }
+
+    if (!onlyNums.test(cleanPhone)) {
+        return res.status(400).send({ message: "Teléfono: solo números del 0 al 9." });
+    }
+
+    if (password.length < 8) {
+        return res.status(400).send({ message: "La contraseña debe tener al menos 8 caracteres." });
+    }
+
+    if (!regex.test(password)) {
+        return res.status(400).send({ message: "La contraseña debe contener al menos un número." });
+    }
+
+    const emailUser = await Users.findOne({
+        where: { email: cleanEmail }
+    });
+
+    if (emailUser) {
+        return res.status(400).send({ message: "El correo electrónico ya está registrado." });
+    }
+
+    const phoneUser = await Users.findOne({
+        where: { phone_number: "+" + cleanPhone }
+    });
+
+    if (phoneUser) {
+        return res.status(400).send({ message: "El número de teléfono ya está registrado." });
+    }
 
     const rolAgente = await Roles.findOne({ where: { name: "Agent" } });
     if (!rolAgente) {
@@ -46,12 +100,12 @@ export const createAgents = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = await Users.create({
-      name,
-      last_name,
-      email,
+      name: cleanName,
+      last_name: cleanLastName,
+      email: cleanEmail,
       password: hashedPassword,
-      phone_number,
-      image_url,
+      phone_number: "+" + cleanPhone,
+      image_url: image_url?.trim() || null,
       id_roles: rolAgente.id_roles,
     });
 

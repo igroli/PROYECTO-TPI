@@ -1,23 +1,17 @@
 .contact-form-container {
-  /* Imagen de fondo exclusiva para esta sección */
   background-image: url("https://images.openai.com/static-rsc-4/gAzcPgKfGPMoh_mV5Tch6-fi7LP1UnCAP3jCpbc3xIczuHWJ5DRuFa2kp4_xz1AyNO_KA7GSiTSQR5ysAQvXGQYWCGm6wnpsl9EZxCsmtTzn6vzJ3rWmJ6GVIoZBmFWHZquGSx9J_6ibxsJm21w7gro4Qv2L07253eIsPGNo58BOK9X5P5tUmuG0RjqGnM2X?purpose=fullsize");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-
-  /* Control de dimensiones para ocupar la pantalla */
   min-height: 100vh;
   width: 100%;
-
-  /* Centra el formulario vertical y horizontalmente */
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 2.5rem;
 }
 
-/* Efecto Glassmorphism aplicado directamente al cuadro del formulario */
 .contact-form-container form {
   background: rgba(40, 40, 40, 0.55);
   backdrop-filter: blur(16px);
@@ -29,7 +23,7 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 
   width: 100%;
-  max-width: 650px; /* Ajusta el ancho máximo a tu gusto */
+  max-width: 650px;
 }
 
 .contact-form-container .form-group {
@@ -44,7 +38,6 @@
   display: block;
 }
 
-/* Inputs oscuros y semi-transparentes */
 .contact-form-container .form-control {
   background-color: rgba(85, 85, 85, 0.65) !important;
   border: 1.5px solid rgba(255, 255, 255, 0.25);
@@ -66,7 +59,6 @@
   opacity: 0.8;
 }
 
-/* Botón Dorado */
 .contact-form-container .btn {
   background-color: #c4a56d !important;
   border: none;
@@ -100,7 +92,6 @@
   margin-bottom: 0;
 }
 
-/* Checkbox personalizados */
 .contact-form-container .form-check-label {
   color: white;
 }
@@ -114,26 +105,4 @@
   background-color: #c4a56d;
   border-color: #c4a56d;
 }
-
-/* Diseño Responsivo */
-@media (max-width: 768px) {
-  .contact-form-container {
-    padding: 1rem;
-  }
-
-  .contact-form-container form {
-    padding: 1.8rem;
-    margin: 0;
-  }
-
-  .contact-form-container .form-label {
-    font-size: 0.95rem;
-  }
-
-  .contact-form-container .form-control {
-    font-size: 0.9rem;
-    padding: 0.75rem 0.9rem;
-  }
-}
-
 

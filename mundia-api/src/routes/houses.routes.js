@@ -13,6 +13,8 @@ import { checkRoles } from "../middlewares/checkRole.js";
 
 const router = Router();
 
+router.get("/houses", getProperties);
+
 router.get("/randomhouses", getCarrouselProperties);
 
 router.get("/house/:id", getProperty);

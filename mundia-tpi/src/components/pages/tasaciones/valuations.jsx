@@ -15,8 +15,9 @@ export default function Valuations() {
     acceptTerms: false,
   });
 
+  // Regex optimizadas
   const onlyNums = /^\d+$/;
-  const nameRegex = /^[a-zA-ZÀ-ÿ]{2,}$/;
+  const nameRegex = /^[a-zA-ZÀ-ÿ\s]{2,}$/; 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   const handleChange = (e) => {
@@ -31,7 +32,7 @@ export default function Valuations() {
     e.preventDefault();
 
     const cleanEmail = formData.email.trim();
-    const cleanPhone = formData.phone.trim();
+    const cleanPhone = formData.phone.trim().replace(/\s+/g, "");
     const cleanFullName = formData.fullName.trim();
 
     if (
@@ -46,46 +47,44 @@ export default function Valuations() {
       return;
     }
 
-    
     if (!emailRegex.test(cleanEmail)) {
       toast.error("Por favor, ingrese un correo electrónico válido.");
       return;
     }
 
-
     const namesArray = cleanFullName.split(/\s+/);
-    const allNamesValid = namesArray.every(name => nameRegex.test(name));
-
     if (namesArray.length < 2) {
       toast.error("Por favor, ingrese su nombre y apellido completo.");
       return;
     }
 
-    if (!allNamesValid) {
-      toast.error("Cada nombre y apellido debe contener solo letras y un mínimo de 2 caracteres.");
-      return;
-    }
-
-
-    if (cleanPhone.length !== 12) {
-      toast.error("El número de teléfono debe tener 12 caracteres.");
+    if (!nameRegex.test(cleanFullName)) {
+      toast.error("El nombre completo debe contener solo letras.");
       return;
     }
 
     if (!onlyNums.test(cleanPhone)) {
-      toast.error("Teléfono: solo números del 0 al 9.");
+      toast.error("Teléfono: solo números sin guiones ni espacios.");
       return;
     }
 
-    
+    if (cleanPhone.length < 10 || cleanPhone.length > 14) {
+      toast.error("El número de teléfono ingresado no es válido (mínimo 10 dígitos).");
+      return;
+    }
+
     if (!formData.acceptTerms) {
       toast.error("Debés aceptar los términos y condiciones para continuar.");
       return;
     }
 
-    toast.success("¡Formulario enviado! Un asesor se pondrá en contacto contigo a la brevedad.");
-
-    console.log("Formulario enviado:", formData);
+    toast.success("¡Formulario enviado!.");
+    console.log("Formulario enviado con éxito:", {
+      ...formData,
+      email: cleanEmail,
+      phone: cleanPhone,
+      fullName: cleanFullName
+    });
 
     setFormData({
       fullName: "",
@@ -118,43 +117,43 @@ export default function Valuations() {
 
           <form className="valuations-form" noValidate onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">Email *</label>
               <input
                 type="email"
                 id="email"
                 name="email"
-                placeholder="Ingrese email"
+                placeholder="ejemplo@correo.com"
                 value={formData.email}
                 onChange={handleChange}
               />
             </div>
 
             <div className="form-group">
-              <label htmlFor="fullName">Nombre y apellido</label>
+              <label htmlFor="fullName">Nombre y apellido *</label>
               <input
                 type="text"
                 id="fullName"
                 name="fullName"
-                placeholder="Ingrese nombre completo"
+                placeholder="Juan Pérez"
                 value={formData.fullName}
                 onChange={handleChange}
               />
             </div>
 
             <div className="form-group">
-              <label htmlFor="phone">Teléfono</label>
+              <label htmlFor="phone">Teléfono *</label>
               <input
                 type="tel"
                 id="phone"
                 name="phone"
-                placeholder="Ingrese teléfono"
+                placeholder="Cod. área + número (sin 0 ni 15)"
                 value={formData.phone}
                 onChange={handleChange}
               />
             </div>
 
             <div className="form-group">
-              <label htmlFor="propertyType">Tipo de propiedad</label>
+              <label htmlFor="propertyType">Tipo de propiedad *</label>
               <select
                 id="propertyType"
                 name="propertyType"
@@ -169,7 +168,7 @@ export default function Valuations() {
             </div>
 
             <div className="form-group full-width">
-              <label htmlFor="location">Localidad/provincia</label>
+              <label htmlFor="location">Localidad/provincia *</label>
               <input
                 type="text"
                 id="location"
@@ -181,7 +180,7 @@ export default function Valuations() {
             </div>
 
             <div className="form-group full-width">
-              <label htmlFor="comments">Comentarios</label>
+              <label htmlFor="comments">Comentarios *</label>
               <textarea
                 id="comments"
                 name="comments"
