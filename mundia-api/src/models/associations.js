@@ -2,7 +2,6 @@ import { Users } from "./Users.js";
 import { Properties } from "./Properties.js";
 import { Agents } from "./Agents.js";
 import { Reservations } from "./Reservations.js";
-import { Favorites } from "./Favorites.js";
 import { Roles } from "./Roles.js";
 
 // relacion agentes propiedades
@@ -43,23 +42,6 @@ Agents.hasMany(Reservations,{
 Reservations.belongsTo(Agents, {
     foreignKey: 'id_agents'
 });
-
-//tabla intermedia favoritos
-Users.belongsToMany(Properties, {
-    through: Favorites, 
-    foreignKey: 'id_users', 
-    otherKey: 'id_properties',
-    as:"favoriteProperties", 
-    onDelete: 'CASCADE'
-});
-
-Properties.belongsToMany(
-    Users, {through: Favorites, 
-        foreignKey: 'id_properties', 
-        otherKey:'id_users',
-        as:"favoritedByUsers", 
-        onDelete: 'CASCADE'
-    });
 
 //relacion roles usuarios
 Roles.hasMany(Users, {
