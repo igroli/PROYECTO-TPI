@@ -32,7 +32,7 @@ const AdminPanel = () => {
   ];
   return (
     <div className="admin-panel">
-      <h1 className="admin-panel-title">Panel de administración</h1>
+      <h1 className="admin-panel-title">Panel de administración.</h1>
       <h2>
         Bienvenido/a {user?.rol || "usuario"} {user?.name || ""}
       </h2>

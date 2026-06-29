@@ -1,4 +1,6 @@
 import { Users } from "../models/Users.js";
+import { Reservations } from "../models/Reservations.js";
+import { Agents } from "../models/Agents.js";
 import bcrypt from "bcrypt";
 
 // get users
@@ -73,22 +75,22 @@ export const updateUsersByAdmin = async (req, res) => {
     return res.status(500).json({ message: "Error del servidor al editar usuario."})
   }
 }
-
 export const deleteUser = async (req, res) => {
   try {
-    const { id_users } = req.body;
-    console.log(req.body);
-    const deleted = await Users.destroy({
-      where: { id_users }
-    });
 
-    if (deleted === 0) {
-      return res.status(404).json({ message: "Usuario no encontrado." });
+    const id_users = req.body?.id_users ?? req.usuario?.id_users;
+
+    if (!id_users) {
+      return res.status(400).json({ message: "No se pudo identificar el usuario." });
     }
 
-    return res.json({ message: "Cuenta eliminada correctamente." });
+    await Reservations.destroy({ where: { id_users } });
+    await Agents.destroy({ where: { id_users } });
+    await Users.destroy({ where: { id_users } });
 
+    return res.json({ message: "Cuenta eliminada correctamente." });
   } catch (error) {
+    console.log("ERROR:", error.message);
     return res.status(500).json({ error: error.message });
   }
 };

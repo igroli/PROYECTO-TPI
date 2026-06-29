@@ -22,6 +22,6 @@ router.get("/users", verifyToken, checkRoles('Admin'), getUsers );
 
 router.put("/users/editrol/:id", verifyToken, checkRoles('Admin'), updateUsersByAdmin);
 
-router.delete("/users/delete", verifyToken, checkRoles('Admin'), deleteUser);
+router.delete("/users/delete", verifyToken, deleteUser);
 
 export default router;
