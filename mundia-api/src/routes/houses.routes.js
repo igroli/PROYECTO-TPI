@@ -24,7 +24,7 @@ router.get("/propiedades", getPropertiesFiltered);
 router.post("/houses", createProperty);
 
 // solo para agents y admin
-router.put("/houses/:id", verifyToken, checkRoles('Admin', 'Agent'), updateProperty);
+router.put("/houses/:id", verifyToken, checkRoles('Agent'), updateProperty);
 // solo para agents y admin
-router.delete("/houses/:id", verifyToken, checkRoles('Admin', 'Agent'), deleteProperty);
+router.delete("/houses/:id", verifyToken, checkRoles('Agent'), deleteProperty);
 export default router;
